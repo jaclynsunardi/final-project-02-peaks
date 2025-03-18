@@ -1,3 +1,0 @@
-this is a temporary text file. delete once other files are added to this folder.
-
-purpose is to show that a tools folder exists.
