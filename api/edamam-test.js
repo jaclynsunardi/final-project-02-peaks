@@ -1,12 +1,13 @@
 import getRecipe from "./edamam.js";
 
-// This is just for testing purposes. 
+// This is just to show how the API works. https://developer.edamam.com/edamam-docs-recipe-api
 
+const ingredients = ["tomato"]
+const excludedIngredients = ["cream"] // This is really aggressive for some reason, maybe don't use this often.
+const diet = []
+const dietaryRestrictions = ["vegan"]
+const limit = 2
 
-const test = ["banana", "chocolate"]
+const res = await getRecipe(ingredients, excludedIngredients, dietaryRestrictions, diet, limit);
 
-const test2 = ["cheese"]
-
-const bob = await getRecipe(test, test2);
-
-console.log(bob)
+console.log(res[0])
