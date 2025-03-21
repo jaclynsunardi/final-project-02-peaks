@@ -16,7 +16,7 @@ function Homepage() {
     <>
       <Logo />
       <div className="home-container">
-        <h1>MisoHungry</h1>
+        <h1>MisoHungry!</h1>
         <button type="button" onClick={scrollToForm}>
           <a href="#form">Click to start!</a>
         </button>
