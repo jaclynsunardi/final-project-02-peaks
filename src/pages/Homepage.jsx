@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 import Form from './Form';
 
@@ -20,7 +20,7 @@ function Homepage() {
         <button type="button" onClick={scrollToForm}>
           <a>Click to start!</a>
         </button>
-        <p>or <NavLink to="/learn" className={({ isActive }) => isActive ? "active-link" : ""}>click here</NavLink> to learn</p>
+        <p>or <Link to="/learn" className={({ isActive }) => isActive ? "active-link" : ""}>click here</Link> to learn</p>
       </div>
       <div ref={formRef}> {/* Reference to Form */}
         <Form />
