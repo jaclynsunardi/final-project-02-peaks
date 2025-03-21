@@ -18,7 +18,7 @@ function Homepage() {
       <div className="home-container">
         <h1>MisoHungry</h1>
         <button type="button" onClick={scrollToForm}>
-          <a>Click to start!</a>
+          <a href="#form">Click to start!</a>
         </button>
         <p>or <Link to="/learn" className={({ isActive }) => isActive ? "active-link" : ""}>click here</Link> to learn</p>
       </div>
