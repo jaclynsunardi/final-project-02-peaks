@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Logo from '../components/Logo';
+// import Logo from '../components/Logo';
 
 function Form() {
     // State for form input
