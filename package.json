@@ -21,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -29,7 +30,10 @@
       "react-app/jest",
       "eslint:recommended",
       "plugin:react/recommended"
-    ]
+    ],
+    "rules": {
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -46,6 +50,7 @@
   "devDependencies": {
     "eslint-plugin-react": "^7.37.4",
     "gh-pages": "^6.3.0",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "eslint": "^8.0.0"
   }
 }
