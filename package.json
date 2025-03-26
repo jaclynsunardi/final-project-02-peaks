@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
-  "homepage": "https://CMPT-276-SPRING-2025.github.io/final-project-02-peaks",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
