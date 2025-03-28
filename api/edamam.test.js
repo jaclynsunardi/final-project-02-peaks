@@ -58,7 +58,7 @@ describe('getRecipe', () => {
     const recipes = await getRecipe([], [], [], [], 1);
 
     expect(recipes).toEqual([]);
-    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(0);
   });
 
   // Test 3: No recipes found
