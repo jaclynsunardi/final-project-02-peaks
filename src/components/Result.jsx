@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from "prop-types";
 
 function Result({ recipeName, recipeLink, filter1, filter2, filter3, description, imageUrl,recipeIngredients}) {
     const navigate = useNavigate();  // Initialize the useNavigate hook
@@ -33,5 +34,16 @@ function Result({ recipeName, recipeLink, filter1, filter2, filter3, description
         </div>
     );
 }
+
+Result.propTypes = {
+    recipeName: PropTypes.string.isRequired,
+    recipeLink: PropTypes.string.isRequired,
+    filter1: PropTypes.string,
+    filter2: PropTypes.string,
+    filter3: PropTypes.string,
+    description: PropTypes.string,
+    imageUrl: PropTypes.string,
+    recipeIngredients: PropTypes.arrayOf(PropTypes.string)
+};
 
 export default Result;
