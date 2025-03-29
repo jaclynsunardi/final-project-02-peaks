@@ -5,7 +5,7 @@ function Form() {
 
     //-------- INFO NEEDED TODO (PLACEHOLDERS -> USE API TO GET THESE VALUES)
     const recipeName = "Recipe Name";
-    const recipeLink = "";
+    const recipeLink = "https://en.wikipedia.org/wiki/Placeholder";
     const filter1 = "EXFILTER1";
     const filter2 = "EXFILTER2";
     const filter3 = "EXFILTER3"; // IF FILTERS ARE SELECTED INSERST (AT MOST 3) INTO HERE

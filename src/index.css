@@ -343,6 +343,10 @@ button {
   justify-content: center; 
 }
 
+.recipe-top {
+  width: 100%;
+  display: flex;
+}
 .recipe-left {
   width: 60%;
 
@@ -356,6 +360,10 @@ button {
   
   display: flex;
   flex-direction: row;
+}
+
+.recipe-filters h4{
+  margin-right: 10%;
 }
 
 .ingredients-container {

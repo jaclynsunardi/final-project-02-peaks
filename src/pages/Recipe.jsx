@@ -1,51 +1,79 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Logo from '../components/Logo';
 
 function Recipe() {
+  const { state } = useLocation();  // Get the state passed through navigate
+
+  // Destructure the variables from the state
+  const { 
+    recipeName, 
+    recipeLink, 
+    filter1, 
+    filter2, 
+    filter3, 
+    description, 
+    imageUrl, 
+    recipeIngredients 
+  } = state || {};  // Ensure there's a fallback for state being undefined
+
   return (
     <>
-        <Logo />
-        <div className="recipe-page">
-            <div className="recipe-container">
+      <Logo />
+      <div className="recipe-page">
+        <div className="recipe-container">
+            <div className="recipe-top">
                 <div className="recipe-left">
-                    {/*TODO (API): link to recipe*/}
-                    <h1>Recipe Name</h1>
+                    {/* Recipe Name as a clickable link */}
+                    <h1>
+                    <a href={recipeLink} target="_blank" rel="noopener noreferrer">
+                        {recipeName}
+                    </a>
+                    </h1>
                     <div className="recipe-filters">
-                        {/*TODO (API): filters*/}
-                        <h4>1</h4>
-                        <h4>2</h4>
-                        <h4>3</h4>
+                    {/* Filters */}
+                    <h4>{filter1}</h4>
+                    <h4>{filter2}</h4>
+                    <h4>{filter3}</h4>
                     </div>
-                    {/*TODO (API): desc? (if possible)*/}
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cumque autem ab fugit voluptas? Delectus iusto molestiae eligendi voluptate! Illo porro asperiores rerum reprehenderit repudiandae aliquam fuga tenetur nobis vel.</p>
+                    {/* Recipe Description */}
+                    <p>{description}</p>
                 </div>
                 <div className="recipe-right">
-                    {/*TODO (API): image*/}
+                    {/* Recipe Image */}
+                    {imageUrl ? (
+                    <img src={imageUrl} alt={recipeName} />
+                    ) : (
+                    <img src="https://uptownprinters.ca/assets/no_image_placeholder.png" alt="No Image" />
+                    )}
                 </div>
-                <h1>Ingredients</h1>
-                <div className="ingredients-container">
-                    <div className="ingredients-left">
-                        {/*TODO (API): Ingredients (left)*/}
-                        <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                        </ul>
-                    </div>
-                    <div className="ingredients-right">
-                        {/*TODO (API): Ingredients (right)*/}
-                        <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="nutrition-container">
-                    <h1>Nutritional Facts</h1>
-                </div>
+          </div>
+
+          <h1>Ingredients</h1>
+          <div className="ingredients-container">
+            <div className="ingredients-left">
+              {/* Left side ingredients */}
+              <ul>
+                {recipeIngredients && recipeIngredients.left && recipeIngredients.left.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>
             </div>
+            <div className="ingredients-right">
+              {/* Right side ingredients */}
+              <ul>
+                {recipeIngredients && recipeIngredients.right && recipeIngredients.right.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="nutrition-container">
+            <h1>Nutritional Facts</h1>
+          </div>
         </div>
+      </div>
     </>
   );
 }
