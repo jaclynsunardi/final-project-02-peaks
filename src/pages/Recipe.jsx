@@ -3,9 +3,8 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../components/Logo';
 
 function Recipe() {
-  const { state } = useLocation();  // Get the state passed through navigate
+  const { state } = useLocation();  // Get variables 
 
-  // Destructure the variables from the state
   const { 
     recipeName, 
     recipeLink, 
@@ -15,7 +14,7 @@ function Recipe() {
     description, 
     imageUrl, 
     recipeIngredients 
-  } = state || {};  // Ensure there's a fallback for state being undefined
+  } = state || {};
 
   return (
     <>

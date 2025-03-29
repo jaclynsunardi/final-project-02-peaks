@@ -13,8 +13,8 @@ function Logo() {
           >
             <img 
               src={LogoImage} 
-              alt="MisoHungry Logo" // Alt text for the image
-              className="logo-image" // Optional: add a class to style the image
+              alt="MisoHungry Logo" 
+              className="logo-image" 
             />
           </NavLink>
         </h1>
