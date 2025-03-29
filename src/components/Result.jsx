@@ -1,32 +1,37 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Result() {
-  return (
-    <>
-        <div className="result-container">
+function Result({ recipeName, recipeLink, filter1, filter2, filter3, description, imageUrl,recipeIngredients}) {
+    const navigate = useNavigate();  // Initialize the useNavigate hook
+
+    const handleClick = () => {
+        // When clicked, navigate to the Recipe page and pass the data via state
+        navigate('/recipe', {
+            state: { recipeName, recipeLink, filter1, filter2, filter3, description, imageUrl,recipeIngredients}
+        });
+    };
+
+    return (
+        <div className="result-container" onClick={handleClick}>
             <div className="result-left">
-                <h1>Recipe Name</h1>
+                <h1>{recipeName}</h1>
                 <div className="result-filters">
-                    {/*TODO (API): filters*/}
-                    <h4>1</h4>
-                    <h4>2</h4>
-                    <h4>3</h4>
+                    <h4>{filter1}</h4>
+                    <h4>{filter2}</h4>
+                    <h4>{filter3}</h4>
                 </div>
-                {/*TODO (API): Desc? (if possible)*/}
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cumque autem ab fugit voluptas? Delectus iusto molestiae eligendi voluptate! Illo porro asperiores rerum reprehenderit repudiandae aliquam fuga tenetur nobis vel.</p>
-                <div className="result-ingredients">
-                    {/*TODO (API): ingredients included and not included (max 3?)*/}
-                    <h4>1</h4>
-                    <h4>2</h4>
-                    <h4>3</h4>
-                </div>
+                <p>{description}</p>
             </div>
             <div className="result-right">
-                {/*TODO (API): image*/}
+                {/* Image with fallback */}
+                <img 
+                    src={imageUrl || "https://uptownprinters.ca/assets/no_image_placeholder.png"} 
+                    alt={recipeName} 
+                    style={{ width: '100%', height: 'auto' }} 
+                />
             </div>
         </div>
-    </>
-  );
+    );
 }
 
 export default Result;

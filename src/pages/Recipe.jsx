@@ -1,8 +1,10 @@
 import React from 'react';
+import Logo from '../components/Logo';
 
 function Recipe() {
   return (
     <>
+        <Logo />
         <div className="recipe-page">
             <div className="recipe-container">
                 <div className="recipe-left">

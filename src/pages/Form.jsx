@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
-import Logo from '../components/Logo';
+import Result from '../components/Result';
 
 function Form() {
+
+    //-------- INFO NEEDED TODO (PLACEHOLDERS -> USE API TO GET THESE VALUES)
+    const recipeName = "Recipe Name";
+    const recipeLink = "";
+    const filter1 = "EXFILTER1";
+    const filter2 = "EXFILTER2";
+    const filter3 = "EXFILTER3"; // IF FILTERS ARE SELECTED INSERST (AT MOST 3) INTO HERE
+    const description = "Description if we can do it?";
+    const imageUrl = ""; 
+    const recipeIngredients = ""; // LIKE AN ARRAY
+
+    //---------------
+
     // State for form input
-    const [inputValue, setInputValue] = useState(" ");
+    const [inputValue, setInputValue] = useState("");
 
     // Handle input changes for the text input
     const handleInputChange = (e) => {
@@ -11,14 +24,14 @@ function Form() {
     };
 
     // State for dropdown
-    const [selectedNationality, setSelectedNationality] = useState(" ");
+    const [selectedNationality, setSelectedNationality] = useState("");
 
     // Handle changes for nationality drop down
     const handleNationalityChange = (e) => {
         setSelectedNationality(e.target.value);
     };
 
-    // Manage state for diet pref
+    // Manage state for diet preference
     const [selectedDiets, setSelectedDiets] = useState([]);
 
     // Handle button click to toggle SELECTION
@@ -32,20 +45,33 @@ function Form() {
         });
     };
 
-    // State for submission
-    const [submitValue, setSubmitValue] = useState(" ");
+    //-------------
 
-    // Handle submission
+    // State for submission 
+    const [submitValue, setSubmitValue] = useState("");
+    const [showSubmitPage, setShowSubmitPage] = useState(false);  // Control display of the submit page
+
+    // Handle submission -> Show results after you submit
     const handleSubmit = () => {
-        // Handle the submission logic here (e.g., form validation, sending data)
-        setSubmitValue("Form Submitted!");
-        
-        // TODO
-    };
-    return (
-        <div className="form-container">
-            <div className="filter-bar">
+        setShowSubmitPage(true); 
 
+        setTimeout(() => {
+            const resultsSection = document.querySelector(".form-submit");
+            if (resultsSection) {
+                const scrollPosition = resultsSection.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: scrollPosition - 100,  
+                    behavior: 'smooth',
+                });
+            }
+        }, 100);  // Delay
+    };
+
+    return (
+        <>
+        <div className="form-container">
+            {/* Form Fields */}
+            <div className="filter-bar">
                 {/* Dietary Preference Buttons */}
                 <button 
                     type="button"
@@ -85,7 +111,7 @@ function Form() {
                     </select>
                 </div>
                 
-                {/* Calories Input (TODO: MIN MAX)*/}
+                {/* Calories Input (TODO: MIN MAX) */}
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     <p>Calories</p>
                     <input 
@@ -94,7 +120,7 @@ function Form() {
                     />
                 </div>
 
-                {/* Time Input (TODO: MIN MAX)*/}
+                {/* Time Input (TODO: MIN MAX) */}
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     <p>Time</p>
                     <input 
@@ -105,18 +131,44 @@ function Form() {
             </div>
 
             {/* Main Input */}
-            <input type="text" className="form-input" value={inputValue} 
-            onChange={handleInputChange} placeholder="TODO Add instructions (?) here"/>
+            <input 
+                type="text" 
+                className="form-input" 
+                value={inputValue} 
+                onChange={handleInputChange} 
+                placeholder="Add instructions (?) here"
+            />
 
             {/* Submit Button */}
             <button 
                 type="button"
-                onClick = {handleSubmit} 
-                className = "submit-button"
+                onClick={handleSubmit} 
+                className="submit-button"
             >
                 Submit
             </button>
         </div>
+
+        {/* Results section */}
+        {showSubmitPage && (
+            <div className="form-submit">
+                <Result 
+                    recipeName={recipeName}
+                    recipeLink={recipeLink}
+                    filter1={filter1}
+                    filter2={filter2}
+                    filter3={filter3}
+                    description={description}
+                    imageUrl={imageUrl}
+                    recipeIngredients = {recipeIngredients}
+                />
+
+                {/* Make like maybe 2 more results after we figure this out */}
+
+
+            </div>
+        )}
+        </>
     );
 }
 
