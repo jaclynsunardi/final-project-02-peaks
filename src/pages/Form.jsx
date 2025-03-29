@@ -3,18 +3,6 @@ import Result from '../components/Result';
 
 function Form() {
 
-    //-------- INFO NEEDED TODO (PLACEHOLDERS -> USE API TO GET THESE VALUES)
-    const recipeName = "Recipe Name";
-    const recipeLink = "https://en.wikipedia.org/wiki/Placeholder";
-    const filter1 = "EXFILTER1";
-    const filter2 = "EXFILTER2";
-    const filter3 = "EXFILTER3"; // IF FILTERS ARE SELECTED INSERST (AT MOST 3) INTO HERE
-    const description = "Description if we can do it?";
-    const imageUrl = ""; 
-    const recipeIngredients = ""; // LIKE AN ARRAY
-
-    //---------------
-
     // State for form input
     const [inputValue, setInputValue] = useState("");
 
@@ -23,6 +11,8 @@ function Form() {
         setInputValue(e.target.value);
     };
 
+    //-----------
+
     // State for dropdown
     const [selectedNationality, setSelectedNationality] = useState("");
 
@@ -30,6 +20,8 @@ function Form() {
     const handleNationalityChange = (e) => {
         setSelectedNationality(e.target.value);
     };
+
+    //-----------
 
     // Manage state for diet preference
     const [selectedDiets, setSelectedDiets] = useState([]);
@@ -45,11 +37,20 @@ function Form() {
         });
     };
 
+    //-------- INFO NEEDED TODO (PLACEHOLDERS -> USE API TO GET THESE VALUES)
+
+    const recipeName = "Recipe Name";
+    const recipeLink = "https://en.wikipedia.org/wiki/Placeholder";
+    const [filter1, filter2, filter3] = selectedDiets.concat(["", "", ""]).slice(0, 3);
+    const description = "Description if we can do it?";
+    const imageUrl = ""; 
+    const recipeIngredients = ""; // LIKE AN ARRAY (or smth.. pass these values to recipe page)
+    
     //-------------
 
     // State for submission 
     const [submitValue, setSubmitValue] = useState("");
-    const [showSubmitPage, setShowSubmitPage] = useState(false);  // Control display of the submit page
+    const [showSubmitPage, setShowSubmitPage] = useState(false);
 
     // Handle submission -> Show results after you submit
     const handleSubmit = () => {

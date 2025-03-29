@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../components/Logo';
 
 function Recipe() {
-  const { state } = useLocation();  // Get variables 
+  const { state } = useLocation();  // Get variables ->
 
   const { 
     recipeName, 
