@@ -20,6 +20,9 @@ dotenv.config({ path: '../.env' }); // Change this to wherever the .env file is.
 //      - timetoMake: estimated cooking time
 
 const getRecipe = async (ingredients = [], excludedIngredients = [], diet = [], dietaryRestrictions = [], limit = 1) => {
+    if (ingredients.length === 0) {
+        return [];
+    }
     ingredients = ingredients.join(",");
     const queryParams = new URLSearchParams({
         type: "public",
@@ -43,7 +46,7 @@ const getRecipe = async (ingredients = [], excludedIngredients = [], diet = [], 
         });
         const json = await response.json();
 
-        if (!json.hits) {
+        if (!json.hits || json.hits.length === 0) {
             console.log("No recipes found");
             return [];
         }
