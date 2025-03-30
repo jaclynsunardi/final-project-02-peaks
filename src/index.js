@@ -24,10 +24,10 @@ const router = createBrowserRouter([
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
     <App />
   </BrowserRouter>
-    // <RouterProvider router={router} />
-  // </React.StrictMode>
+  <RouterProvider router={router} />
+  </React.StrictMode>
 );
