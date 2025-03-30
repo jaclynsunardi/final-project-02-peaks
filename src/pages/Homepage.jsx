@@ -20,8 +20,8 @@ function Homepage() {
         <button type="button" onClick={scrollToForm}>
           <a href="#form">Click to start!</a>
         </button>
-        <p>or <Link to="/learn" className={({ isActive }) => isActive ? "active-link" : ""}>click here</Link> to learn</p>
-      </div>
+        <p>or <Link to="/learn">click here</Link> to learn</p>
+        </div>
       <div ref={formRef}> {/* Reference to Form */}
         <Form />
       </div>

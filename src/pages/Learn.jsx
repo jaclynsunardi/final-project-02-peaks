@@ -23,6 +23,7 @@ function Learn() {
             </div>
         </div>
         <p><NavLink to = '/index' className={({ isActive }) => isActive ? "active-link" : ""}>Back to Home</NavLink></p>
+        
       </div>
     </>
   );
