@@ -22,7 +22,7 @@ function Learn() {
                 <p>Find recipes</p> 
             </div>
         </div>
-        <p><NavLink to = '/index' className={({ isActive }) => isActive ? "active-link" : ""}>Back to Home</NavLink></p>
+        <NavLink to='/' className={({ isActive }) => isActive ? "active-link" : ""}/>
         
       </div>
     </>
