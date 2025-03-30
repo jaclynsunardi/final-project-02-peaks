@@ -1,5 +1,6 @@
 import getRecipe from './edamam.js';
 
+
 // Mock the fetch function
 global.fetch = jest.fn(() =>
   Promise.resolve({
