@@ -2,6 +2,10 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Logo from '../components/Logo';
 
+import { useNavigate } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
+
 function Recipe() {
   const { state } = useLocation();  // Get variables ->
 

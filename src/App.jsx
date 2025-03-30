@@ -4,12 +4,14 @@ import { createBrowserRouter, RouterProvider, Routes, Route } from 'react-router
 
 import Homepage from './pages/Homepage.jsx';
 import Learn from './pages/Learn.jsx';
+import Recipe from './pages/Recipe.jsx';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/learn" element={<Learn />} />
+      <Route path="/recipe" element={<Recipe />} />
     </Routes>
   );
 }
