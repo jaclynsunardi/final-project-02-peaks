@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=falase react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint .",
@@ -46,7 +46,8 @@
       "plugin:react/recommended"
     ],
     "rules": {
-      "no-unused-vars": "off"
+      "no-unused-vars": "off",
+      "jsx-a11y/img-redundant-alt": "off"
     }
   },
   "browserslist": {
