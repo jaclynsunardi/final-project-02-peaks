@@ -15,7 +15,7 @@
     "web-vitals": "^2.1.4"
   },
   "jest": {
-    "testEnvironment": "jsdom",
+    "testEnvironment": "node",
     "transform": {
       "^.+\\.js$": "babel-jest"
     },
@@ -73,4 +73,5 @@
     "jest": "^27.5.1",
     "react-scripts": "^5.0.1"
   }
+  
 }

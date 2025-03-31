@@ -1,5 +1,5 @@
 import express from 'express';
-import getNutritionalInfo from './nutrition.js';
+import getNutritionalInfo from './foodfactsinfo.js';
 
 const router = express.Router();
 
