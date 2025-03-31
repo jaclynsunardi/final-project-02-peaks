@@ -10,6 +10,8 @@ dotenv.config({ path: '../../.env' }); // Change this to wherever the .env file 
 //      - dietaryRestrictions: Takes in an array of the following keywords:  low-fat-abs, low-potassium, low-sugar, lupine-free, peanut-free, pescatarian, pork-free, 
 //                                                                           red-meat-free, sesame-free, shellfish-free, soy-free, sugar-conscious, sulfite-free, 
 //                                                                           tree-nut-free, vegan, vegetarian, wheat-free (there's more but I've limited them to this for simplicity sake)
+//      - cuisineType: Takes in a string to set dishes to be of the following cuisines: American, Asian, British, Caribbean, Central Europe, Chinese, Eastern Europe, French, Indian, Italian, Japanese, 
+//                                                                                      Kosher, Mediterranean, Mexican, Middle Eastern, Nordic, South American, South East Asian
 //      - maxCal: Takes in an integer of the maximum amount of calories that the recipe should have.
 //      - maxTime: Takes in an integer of the maximum amount of time (in minutes) the recipe should have.
 //      - limit: Takes in an integer, will set how many recipe results we want to see, by default set to 1. Should change later.
@@ -21,7 +23,15 @@ dotenv.config({ path: '../../.env' }); // Change this to wherever the .env file 
 //      - ingredients: An array of javascript objects, each object corresponds to an ingredient + its amount
 //      - timetoMake: estimated cooking time in minutes.
 
-const getRecipe = async (ingredients = [], excludedIngredients = [], diet = [], dietaryRestrictions = [], maxCal, maxTime, limit = 1) => {
+const getRecipe = async (
+    ingredients = [], 
+    excludedIngredients = [], 
+    diet = [], 
+    dietaryRestrictions = [], 
+    cuisineType = "",
+    maxCal=null, 
+    maxTime=null, 
+    limit = 1 ) => {
     if (ingredients.length === 0) {
         return [];
     }
@@ -29,12 +39,13 @@ const getRecipe = async (ingredients = [], excludedIngredients = [], diet = [], 
     const queryParams = new URLSearchParams({
         type: "public",
         q: ingredients,
-        app_id: process.env.EDAMAM_APP_ID,
-        app_key: process.env.EDAMAM_API_KEY,
+        app_id: process.env.REACT_APP_EDAMAM_APP_ID,
+        app_key: process.env.REACT_APP_EDAMAM_API_KEY,
     });
 
     // For whatever reason the API has a stroke if you send it an empty array. These conditions will
     // add the parameters if their arrays aren't empty.
+    if (cuisineType) queryParams.append("cuisineType", cuisineType)
     if (excludedIngredients.length > 0) queryParams.append("excludedIngredient", excludedIngredients.join(","));
     if (dietaryRestrictions.length > 0) dietaryRestrictions.forEach(d => queryParams.append("health", d));
     if (diet.length > 0) diet.forEach(d => queryParams.append("diet", d));
@@ -68,7 +79,8 @@ const getRecipe = async (ingredients = [], excludedIngredients = [], diet = [], 
                 imageURL: current.image,
                 ingredients: current.ingredients,
                 timetoMake: current.totalTime,
-                calories: current.calories
+                calories: current.calories,
+                cuisineType: current.cuisineType
             };
             res.push(parsedData);
         }

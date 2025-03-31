@@ -156,7 +156,7 @@ button {
 
 .form-input {
   width: min(max(80%, 200px), 900px);
-  height: min(max(60%, 100px), 400px);
+  height: min(max(30%, 100px), 200px); /* height: min(max(60%, 100px), 400px); for full size */
 }
 
 .submit-button {

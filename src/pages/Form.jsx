@@ -1,15 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Result from '../components/Result';
+import getRecipe from '../api/edamam';
 
 function Form() {
 
+    //-----------
+
+    const [recipeData, setRecipeData] = useState([]);
+
+      const getRecipes = async () => {
+        const recipeArr = await getRecipe(
+            inputIngredients, 
+            excludedIngredients, 
+            [], // dietaryRestrictions -- may implement or delete later, 
+            selectedDiets, 
+            selectedNationality,
+            maxCal, 
+            maxTime, 
+            5 // temporary placeholder
+        )
+        setRecipeData(recipeArr)
+    }
+
+    //-----------
+
+    const [maxCal, setMaxCal] = useState(null)
+    const [maxTime, setMaxTime] = useState(null)
+
+    const handleCal = (e) => {
+        setMaxCal(e.target.value)
+    }
+
+    const handleTime = (e) => {
+        setMaxTime(e.target.value)
+    }
+
+    //-----------
+    
     // State for form input
     const [inputValue, setInputValue] = useState("");
+    const [excludedValue, setExcludedValue] = useState("")
+    
+    // States to send to function
 
-    // Handle input changes for the text input
-    const handleInputChange = (e) => {
+    const [inputIngredients, setInputIngredients] = useState([]);
+    const [excludedIngredients, setExcludedIngredients] = useState([]);
+
+    
+    // this will force the string into an array to pass into a function
+    // Splits the string with commas
+    const parseInputToArray = (input) => {
+        return input
+          .split(",")
+          .map(item => item.trim())
+          .filter(item => item.length > 0);
+      };
+
+      // Function for included Ingredients
+    const handleInputIngredients = (e) => {
         setInputValue(e.target.value);
-    };
+        setInputIngredients(parseInputToArray(e.target.value))  
+    }
+
+    const handleExcludedIngredients = (e) => {
+        setExcludedValue(e.target.value)
+        setExcludedIngredients(parseInputToArray(e.target.value))  
+    }
+
+    // Function for excluded ingredients
 
     //-----------
 
@@ -28,13 +86,16 @@ function Form() {
 
     // Handle button click to toggle SELECTION
     const handleDietButtonClick = (diet) => {
+        
         setSelectedDiets(prevSelectedDiets => {
+            
             if (prevSelectedDiets.includes(diet)) {
                 return prevSelectedDiets.filter(item => item !== diet);
             } else {
                 return [...prevSelectedDiets, diet];
             }
         });
+        
     };
 
     //-------- INFO NEEDED TODO (PLACEHOLDERS -> USE API TO GET THESE VALUES)
@@ -47,15 +108,28 @@ function Form() {
     const recipeIngredients = ""; // LIKE AN ARRAY (or smth.. pass these values to recipe page)
     
     //-------------
+    
+    // This function will generate a list of the recipes given the parsed data, and throw it to react to render.
+    const generateRecipes = () => {
+        let recipeList = []
+        if (recipeData.length < 0) return []
+        for (let i = 0; i < recipeData.length; i++) {
+            console.log(recipeData.length)
+        }
+    }
+
+
+    //-------------
 
     // State for submission 
     const [submitValue, setSubmitValue] = useState("");
     const [showSubmitPage, setShowSubmitPage] = useState(false);
 
     // Handle submission -> Show results after you submit
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setShowSubmitPage(true); 
-
+        await getRecipes()
+        generateRecipes()
         setTimeout(() => {
             const resultsSection = document.querySelector(".form-submit");
             if (resultsSection) {
@@ -76,22 +150,22 @@ function Form() {
                 {/* Dietary Preference Buttons */}
                 <button 
                     type="button"
-                    onClick={() => handleDietButtonClick('Vegan')}
-                    className={selectedDiets.includes('Vegan') ? 'selected' : ''} 
+                    onClick={() => handleDietButtonClick('vegan')} // change to lowercase so the api recognizes the values.
+                    className={selectedDiets.includes('vegan') ? 'selected' : ''} 
                 >
                     Vegan
                 </button>
                 <button 
                     type="button"
-                    onClick={() => handleDietButtonClick('Vegetarian')}
-                    className={selectedDiets.includes('Vegetarian') ? 'selected' : ''}
+                    onClick={() => handleDietButtonClick('vegetarian')}
+                    className={selectedDiets.includes('vegetarian') ? 'selected' : ''}
                 >
                     Vegetarian
                 </button>
                 <button 
                     type="button"
-                    onClick={() => handleDietButtonClick('Gluten Free')}
-                    className={selectedDiets.includes('Gluten Free') ? 'selected' : ''}
+                    onClick={() => handleDietButtonClick('gluten-free')}
+                    className={selectedDiets.includes('gluten-free') ? 'selected' : ''}
                 >
                     Gluten Free
                 </button>
@@ -107,8 +181,9 @@ function Form() {
                         <option value="">Select Nationality</option>
                         <option value="American">American</option>
                         <option value="Asian">Asian</option>
-                        <option value="European">European</option>
-                        <option value="African">African</option>
+                        <option value="Central Europe">European</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Indian">Indian</option>
                     </select>
                 </div>
                 
@@ -116,8 +191,9 @@ function Form() {
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     <p>Calories</p>
                     <input 
-                        type="text" 
+                        type="number" 
                         placeholder="999" 
+                        onChange={handleCal}
                     />
                 </div>
 
@@ -125,8 +201,9 @@ function Form() {
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     <p>Time</p>
                     <input 
-                        type="text" 
-                        placeholder="999" 
+                        type="number" 
+                        placeholder="999"
+                        onChange={handleTime} 
                     />
                 </div>
             </div>
@@ -136,8 +213,15 @@ function Form() {
                 type="text" 
                 className="form-input" 
                 value={inputValue} 
-                onChange={handleInputChange} 
-                placeholder="Add instructions (?) here"
+                onChange={handleInputIngredients} 
+                placeholder="What ingredients do you want in the recipe? e.g. Tomato, Garlic, Cheese"
+            />
+            <input 
+                type="text" 
+                className="form-input" 
+                value={excludedValue} 
+                onChange={handleExcludedIngredients} 
+                placeholder="What ingredients should be left out? e.g. Potato, Peanut, Pepper"
             />
 
             {/* Submit Button */}
