@@ -17,7 +17,7 @@ function Form() {
             selectedNationality,
             maxCal, 
             maxTime, 
-            5 // temporary placeholder
+            3 // temporary placeholder
         )
         setRecipeData(recipeArr)
     }
@@ -94,7 +94,7 @@ function Form() {
             } else {
                 return [...prevSelectedDiets, diet];
             }
-        });
+        }); 
         
     };
 
@@ -110,14 +110,31 @@ function Form() {
     //-------------
     
     // This function will generate a list of the recipes given the parsed data, and throw it to react to render.
-    const generateRecipes = () => {
-        let recipeList = []
-        if (recipeData.length < 0) return []
-        for (let i = 0; i < recipeData.length; i++) {
-            console.log(recipeData.length)
-        }
-    }
 
+    const [recipeList, setRecipeList] = useState([]);
+
+    useEffect(() => {
+        if (recipeData.length > 0) {
+          let recipeListtmp = [];
+          for (let i = 0; i < recipeData.length; i++) {
+            let item = recipeData[i];
+            recipeListtmp.push(
+              <Result 
+                key={i}
+                recipeName={item.recipeName}
+                recipeLink={item.recipeURL}
+                filter1={filter1}
+                filter2={filter2}
+                filter3={filter3}
+                description={"Test Description"}
+                imageUrl={item.imageURL}
+                recipeIngredients={item.ingredients.map(ingr => ingr.food)}
+              />
+            );
+          }
+          setRecipeList(recipeListtmp);
+        }
+      }, [recipeData, filter1, filter2, filter3]);
 
     //-------------
 
@@ -127,9 +144,8 @@ function Form() {
 
     // Handle submission -> Show results after you submit
     const handleSubmit = async () => {
-        setShowSubmitPage(true); 
+        setShowSubmitPage(true);
         await getRecipes()
-        generateRecipes()
         setTimeout(() => {
             const resultsSection = document.querySelector(".form-submit");
             if (resultsSection) {
@@ -237,7 +253,7 @@ function Form() {
         {/* Results section */}
         {showSubmitPage && (
             <div className="form-submit">
-                <Result 
+                {/* <Result 
                     recipeName={recipeName}
                     recipeLink={recipeLink}
                     filter1={filter1}
@@ -246,7 +262,8 @@ function Form() {
                     description={description}
                     imageUrl={imageUrl}
                     recipeIngredients = {recipeIngredients}
-                />
+                /> */}
+                {recipeList}
 
                 {/* Make like maybe 2 more results after we figure this out */}
 
