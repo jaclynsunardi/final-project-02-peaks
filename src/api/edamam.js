@@ -1,6 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config({ path: '../.env' }); // Change this to wherever the .env file is. Contains the API Key and App ID.
-
 // getRecipe: This function queries the API with the specified parameters and returns a list of recipes.
 //
 // Parameters:
@@ -27,8 +24,8 @@ const getRecipe = async (ingredients = [], excludedIngredients = [], diet = [], 
     const queryParams = new URLSearchParams({
         type: "public",
         q: ingredients,
-        app_id: process.env.EDAMAM_APP_ID,
-        app_key: process.env.EDAMAM_API_KEY,
+        app_id: process.env.REACT_APP_EDAMAM_APP_ID,
+        app_key: process.env.REACT_APP_EEDAMAM_API_KEY,
     });
 
     // For whatever reason the API has a stroke if you send it an empty array. These conditions will

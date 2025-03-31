@@ -11,7 +11,6 @@ const payload = {
     oauth_timestamp: Math.floor(Date.now() / 1000),
     oauth_nonce:"abc",
     oauth_version: "1.0"
-    
 }
 
 console.log(KEY, SECRET)
