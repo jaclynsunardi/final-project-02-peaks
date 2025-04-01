@@ -31,7 +31,8 @@
     },
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"
-    ]
+    ],
+    "moduleDirectories": ["node_modules", "<rootDir>/api", "<rootDir>/src"]
   },
   "scripts": {
     "start": "react-scripts start",
