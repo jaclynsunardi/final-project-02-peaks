@@ -1,4 +1,4 @@
-import getRecipe from './edamam.js';
+import getRecipe from './edamam.js'
 
 
 // Mock the fetch function
