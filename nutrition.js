@@ -1,23 +1,16 @@
+// Original nutrition facts (to test openAI)
+
 import { OpenAI } from 'openai';
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-// Check if the API key is set in the .env file
-if (!process.env.OPEN_AI_KEY) {
-    throw new Error("OPEN_AI_KEY is not set in your .env file");
-}
-
-// Initialize the OpenAI client with the API key
 const openai = new OpenAI({
-    apiKey: process.env.OPEN_AI_KEY,
+    apiKey:  process.env.REACT_APP_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true,
 });
 
-// Function to generate the nutrition description
 const generateNutrition = async (ingredients) => {
     try {
-        const formattedIngredients = ingredients.join(", "); // Convert array to comma-separated string
-        
+        const formattedIngredients = ingredients.join(", ");
+
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
             messages: [
@@ -33,14 +26,11 @@ const generateNutrition = async (ingredients) => {
             max_tokens: 4096,
         });
 
-        // Log the response to the console
-        console.log(response.choices[0].message.content);
+        return response.choices[0].message.content;
     } catch (error) {
         console.error('Error generating nutrition:', error);
+        return "Failed to fetch nutritional data.";
     }
 };
 
-// Example array of ingredients for testing
-const testIngredients = ["500g pork intestine", "1 cup white rice"];
-
-generateNutrition(testIngredients);
+export default generateNutrition;

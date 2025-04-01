@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import Logo from '../components/Logo';
-
-import { useNavigate } from 'react-router-dom';
-import PropTypes from "prop-types";
+import generateNutrition from '../api/server'; 
 import { Link } from 'react-router-dom';
 
 function Recipe() {
-  const { state } = useLocation();  // Get variables ->
+  // Get variables
+  const { state } = useLocation();
 
   const { 
     recipeName, 
@@ -20,60 +19,76 @@ function Recipe() {
     recipeIngredients 
   } = state || {};
 
+  // puts ingredients into arrays
+  const ingredientsArray = useMemo(() => {
+    return recipeIngredients ? recipeIngredients : [];
+  }, [recipeIngredients]);
+
+  // State to store nutritional data
+  const [nutritionData, setNutritionData] = useState('');
+
+  // uses openai to get nutrition
+  useEffect(() => {
+    const fetchNutrition = async () => {
+      if (ingredientsArray.length > 0) {
+        const nutrition = await generateNutrition(ingredientsArray);
+        setNutritionData(nutrition);
+      }
+    };
+
+    fetchNutrition();
+  }, [ingredientsArray]);
+
   return (
     <>
       <Logo />
       <div className="recipe-page">
         <div className="recipe-container">
-            <div className="recipe-top">
-                <div className="recipe-left">
-                    {/* Recipe Name as a clickable link */}
-                    <h1>
-                    <a href={recipeLink} target="_blank" rel="noopener noreferrer">
-                        {recipeName}
-                    </a>
-                    </h1>
-                    <div className="recipe-filters">
-                    {/* Filters */}
-                    <h4>{filter1}</h4>
-                    <h4>{filter2}</h4>
-                    <h4>{filter3}</h4>
-                    </div>
-                    {/* Recipe Description */}
-                    <p>{description}</p>
-                </div>
-                <div className="recipe-right">
-                    {/* Recipe Image */}
-                    {imageUrl ? (
-                    <img src={imageUrl} alt={recipeName} />
-                    ) : (
-                    <img src="https://uptownprinters.ca/assets/no_image_placeholder.png" alt="No Image" />
-                    )}
-                </div>
+          <div className="recipe-top">
+            <div className="recipe-left">
+              {/* Recipe Name -> Clickable link */}
+              <h1>
+                <a href={recipeLink} target="_blank" rel="noopener noreferrer">
+                  {recipeName}
+                </a>
+              </h1>
+              <div className="recipe-filters">
+                {/* Filters */}
+                <h4>{filter1}</h4>
+                <h4>{filter2}</h4>
+                <h4>{filter3}</h4>
+              </div>
+              {/* Recipe Description */}
+              <p>{description}</p>
+            </div>
+            <div className="recipe-right">
+              {/* Recipe Image */}
+              {imageUrl ? (
+                <img src={imageUrl} alt={recipeName} />
+              ) : (
+                <img src="https://uptownprinters.ca/assets/no_image_placeholder.png" alt="No Image" />
+              )}
+            </div>
           </div>
 
           <h1>Ingredients</h1>
           <div className="ingredients-container">
-            <div className="ingredients-left">
-              {/* Left side ingredients */}
-              <ul>
-                {recipeIngredients && recipeIngredients.left && recipeIngredients.left.map((ingredient, index) => (
-                  <li key={index}>{ingredient}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="ingredients-right">
-              {/* Right side ingredients */}
-              <ul>
-                {recipeIngredients && recipeIngredients.right && recipeIngredients.right.map((ingredient, index) => (
-                  <li key={index}>{ingredient}</li>
-                ))}
-              </ul>
-            </div>
+            <ul>
+              {/* Render all ingredients */}
+              {ingredientsArray.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
           </div>
 
           <div className="nutrition-container">
             <h1>Nutritional Facts</h1>
+            {/* Display the fetched nutrition data */}
+            {nutritionData ? (
+              <div>{nutritionData}</div>
+            ) : (
+              <p>Loading nutritional data...</p>
+            )}
           </div>
         </div>
       </div>
