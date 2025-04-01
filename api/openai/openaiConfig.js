@@ -1,10 +1,15 @@
-const { Configuration, OpenAIApi } = require('openai')
-require('dotenv').config()
+import { OpenAI } from 'openai'; // Correctly import OpenAI from 'openai'
+import dotenv from 'dotenv';
 
-const configuration = new Configuration ({
-    apiKey: process.env.OPEN_AI_KEY
-})
+dotenv.config();
 
-const openai = new OpenAIApi(configuration)
+if (!process.env.OPEN_AI_KEY) {
+    throw new Error("OPEN_AI_KEY is not set in your .env file");
+}
 
-module.export = openai
+// Use the OpenAI client directly without the Configuration constructor
+const openai = new OpenAI({
+    apiKey: process.env.OPEN_AI_KEY,
+});
+
+export default openai;
