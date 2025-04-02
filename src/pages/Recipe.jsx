@@ -47,7 +47,7 @@ function Recipe() {
           <div className="recipe-top">
             <div className="recipe-left">
               {/* Recipe Name -> Clickable link */}
-              <h1>
+              <h1 className = "recipe-title">
                 <a href={recipeLink} target="_blank" rel="noopener noreferrer">
                   {recipeName}
                 </a>
@@ -71,7 +71,7 @@ function Recipe() {
             </div>
           </div>
 
-          <h1>Ingredients</h1>
+          <h1 className="ingredients-title">Ingredients</h1>
           <div className="ingredients-container">
             <ul>
               {/* Render all ingredients */}
