@@ -18,7 +18,7 @@ function Homepage() {
       <div className="home-container">
         <h1>Miso Hungry</h1>
         <button type="button" onClick={scrollToForm}>
-          <a href="#form">Click to start!</a>
+          <p><a href="#form">Click to start!</a></p>
         </button>
         <p>or <Link to="/learn">click here</Link> to learn</p>
         </div>

@@ -13,25 +13,23 @@ function Result({ recipeName, recipeLink, filter1, filter2, filter3, description
             }} 
             state={{ recipeName, recipeLink, filters, description, imageUrl, recipeIngredients }}
             className="result-container"
+            style = {{textDecoration: 'none', color: '#333'}}
+            
         >
-            <div className="result-container">
-                <div className="result-left">
-                    <h1>{recipeName}</h1>
-                    <div className="result-filters">
-                        <h4>{filter1}</h4>
-                        <h4>{filter2}</h4>
-                        <h4>{filter3}</h4>
-                    </div>
-                    <p>{description}</p>
+            <div className="result-left">
+                <h1>{recipeName}</h1>
+                <div className="result-filters">
+                    <h4>{filter1}</h4>
+                    <h4>{filter2}</h4>
+                    <h4>{filter3}</h4>
                 </div>
-                <div className="result-right">
-                    {/* Image with fallback */}
-                    <img 
-                        src={imageUrl || "https://uptownprinters.ca/assets/no_image_placeholder.png"} 
-                        alt={recipeName} 
-                        style={{ width: '100%', height: 'auto' }} 
-                    />
-                </div>
+            </div>
+            <div className="result-right">
+                <img 
+                    src={imageUrl || "https://uptownprinters.ca/assets/no_image_placeholder.png"} 
+                    alt={recipeName} 
+                    style={{ width: '100%', height: 'auto' }} 
+                />
             </div>
         </Link>
     );
