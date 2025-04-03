@@ -5,7 +5,7 @@ import getRecipe from '../api/edamam';
 function Form() {
 
     //-----------
-
+    //Init recipeData
     const [recipeData, setRecipeData] = useState([]);
 
       const getRecipes = async () => {
@@ -24,6 +24,8 @@ function Form() {
 
     //-----------
 
+    // State for calories
+    // Might have to get rid of time
     const [maxCal, setMaxCal] = useState(null)
     const [maxTime, setMaxTime] = useState(null)
 
@@ -31,9 +33,10 @@ function Form() {
         setMaxCal(e.target.value)
     }
 
-    const handleTime = (e) => {
-        setMaxTime(e.target.value)
-    }
+    // Commented this because the time thing on the api is wack
+    // const handleTime = (e) => {
+    //     setMaxTime(e.target.value)
+    // }
 
     //-----------
     
@@ -42,11 +45,9 @@ function Form() {
     const [excludedValue, setExcludedValue] = useState("")
     
     // States to send to function
-
     const [inputIngredients, setInputIngredients] = useState([]);
     const [excludedIngredients, setExcludedIngredients] = useState([]);
 
-    
     // This will force the string into an array to pass into a function
     // Splits the string with commas
     const parseInputToArray = (input) => {
@@ -81,21 +82,15 @@ function Form() {
 
     //-----------
 
-    // Manage state for diet preference
+    // State for diets -> UPDATES 
+    const [tempSelectedDiets, setTempSelectedDiets] = useState([]);
     const [selectedDiets, setSelectedDiets] = useState([]);
 
     // Handle button click to toggle SELECTION
     const handleDietButtonClick = (diet) => {
-        
-        setSelectedDiets(prevSelectedDiets => {
-            
-            if (prevSelectedDiets.includes(diet)) {
-                return prevSelectedDiets.filter(item => item !== diet);
-            } else {
-                return [...prevSelectedDiets, diet];
-            }
-        }); 
-        
+        setTempSelectedDiets(prev => 
+            prev.includes(diet) ? prev.filter(item => item !== diet) : [...prev, diet]
+        ); 
     };
 
     //-------- INFO NEEDED TODO (PLACEHOLDERS -> USE API TO GET THESE VALUES)
@@ -110,7 +105,6 @@ function Form() {
     //-------------
     
     // This function will generate a list of the recipes given the parsed data, and throw it to react to render.
-
     const [recipeList, setRecipeList] = useState([]);
 
     useEffect(() => {
@@ -138,24 +132,28 @@ function Form() {
 
     //-------------
 
-    // State for submission 
-    const [submitValue, setSubmitValue] = useState("");
+    // State for submission
+    const [errorMessage, setErrorMessage] = useState("");
     const [showSubmitPage, setShowSubmitPage] = useState(false);
 
     // Handle submission -> Show results after you submit
     const handleSubmit = async () => {
+        // Handle empty input message
+        if (inputIngredients.length === 0) {
+            setErrorMessage("Please enter at least one ingredient");
+            return;
+        }
+        setErrorMessage("");
+
         setShowSubmitPage(true);
-        await getRecipes()
+        setSelectedDiets(tempSelectedDiets); // Apply filters
+        await getRecipes();
         setTimeout(() => {
             const resultsSection = document.querySelector(".form-submit");
             if (resultsSection) {
-                const scrollPosition = resultsSection.getBoundingClientRect().top + window.scrollY;
-                window.scrollTo({
-                    top: scrollPosition - 100,  
-                    behavior: 'smooth',
-                });
+                window.scrollTo({ top: resultsSection.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
             }
-        }, 100);  // Delay
+        }, 100);
     };
 
     return (
@@ -167,23 +165,23 @@ function Form() {
                 <button 
                     type="button"
                     onClick={() => handleDietButtonClick('vegan')} // change to lowercase so the api recognizes the values.
-                    className={selectedDiets.includes('vegan') ? 'selected' : ''} 
+                    className={tempSelectedDiets.includes('vegan') ? 'selected' : ''} 
                 >
-                    Vegan
+                    <p style={{ fontFamily:"GroteskReg"}}>Vegan</p>
                 </button>
                 <button 
                     type="button"
                     onClick={() => handleDietButtonClick('vegetarian')}
-                    className={selectedDiets.includes('vegetarian') ? 'selected' : ''}
+                    className={tempSelectedDiets.includes('vegetarian') ? 'selected' : ''}
                 >
-                    Vegetarian
+                    <p style={{ fontFamily:"GroteskReg"}}>Vegetarian</p>
                 </button>
                 <button 
                     type="button"
                     onClick={() => handleDietButtonClick('gluten-free')}
-                    className={selectedDiets.includes('gluten-free') ? 'selected' : ''}
+                    className={tempSelectedDiets.includes('gluten-free') ? 'selected' : ''}
                 >
-                    Gluten Free
+                    <p style={{ fontFamily:"GroteskReg"}}>Gluten Free</p>
                 </button>
 
                 {/* Nationality Dropdown */}
@@ -248,6 +246,9 @@ function Form() {
             >
                 Submit
             </button>
+
+            {/* Error for empty input */}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
 
         {/* Results section */}
@@ -266,7 +267,6 @@ function Form() {
                 {recipeList}
 
                 {/* Make like maybe 2 more results after we figure this out */}
-
 
             </div>
         )}

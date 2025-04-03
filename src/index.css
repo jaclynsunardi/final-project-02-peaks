@@ -10,8 +10,13 @@
 }
 
 @font-face {
-  font-family: Grotesk;
+  font-family: GroteskBold;
   src: url(fonts/Grotesk.ttf)
+}
+
+@font-face {
+  font-family: GroteskReg;
+  src: url(fonts/GroteskReg.ttf)
 }
 
 
@@ -43,15 +48,6 @@ button {
   cursor: pointer;
 }
 
-a {
-  color: white; /* Change this to any color you want */
-}
-
-a:hover {
-  color: darkred; /* Optional: Change color on hover */
-}
-
-
 .home-container {
   width: 100vw; 
   height: 100vh;
@@ -74,7 +70,6 @@ a:hover {
   background-color: #e3e9f0;
   border: 1px solid #b5bbc2;
   border-radius: 8px;
-  font-family: Grotesk;
 
   padding-left: 2vw;
   padding-right: 2vw;
@@ -84,6 +79,7 @@ a:hover {
 
 .home-container button a {
   color: rgb(32, 29, 29);
+  font-family: GroteskBold;
   font-size: min(max(2.5vw, 18px), 25px);
   text-decoration: none;
   font-weight: bold;
@@ -101,6 +97,14 @@ a:hover {
 .home-container button:hover {
   background-color: rgba(165, 165, 165, 0.3); 
   border: 1px solid rgba(165, 165, 165, 0.3);
+}
+
+.home-container a {
+  color: white;
+}
+
+.home-container a:hover {
+  color: darkred;
 }
 
 /*------------------------*/
@@ -124,6 +128,7 @@ a:hover {
   background-color: rgb(35, 30, 26);
   width: min(max(60%, 200px), 1000px);
   height: min(max(15%, 50px), 70px);
+  font-family: GroteskReg;
 
   margin-bottom: 10px;
   border-radius: 8px;
@@ -217,6 +222,11 @@ a:hover {
   background-repeat: no-repeat;
 }
 
+.form-container p {
+  color: #e3e9f0;
+  font-family: GroteskReg;
+}
+
 /*------------------------*/
 
 .learn-container {
@@ -260,6 +270,14 @@ a:hover {
   flex-direction: column;
   justify-content: center; 
   align-items: center; 
+}
+
+.learn-container a {
+  color: white;
+}
+
+.learn-container a:hover {
+  color: darkred;
 }
 
 /*------------------------*/
