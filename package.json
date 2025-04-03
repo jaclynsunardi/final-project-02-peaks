@@ -11,7 +11,7 @@
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
     "node-fetch": "^2.7.0",
-    "openai": "^4.90.0",
+    "openai": "^4.91.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.0",
@@ -32,7 +32,11 @@
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"
     ],
-    "moduleDirectories": ["node_modules", "<rootDir>/api", "<rootDir>/src"]
+    "moduleDirectories": [
+      "node_modules",
+      "<rootDir>/api",
+      "<rootDir>/src"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
