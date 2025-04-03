@@ -305,13 +305,15 @@ button {
 
 .result-container {
   background-color: #eaecee;
-  width: min(max(60%, 200px), 900px);
-  height: min(max(30%, 200px), 300px);
+  width: min(max(50%, 200px), 900px);
+  max-height: 180px;
   border-radius: 8px;
-  margin: 20px;
+  padding: 2%;
+  margin-top: -40px;
+  margin-bottom: 60px;
+  font-family: GroteskBold;
 
   display: flex;
-
   transition: transform 0.3s ease;
 }
 
@@ -322,16 +324,21 @@ button {
 
 .result-left {
   width: 60%;
-  margin-inline: 5%;
-  margin-top: 4%;
-
   display: flex;
+  margin-inline: 5%;
+  font-size: 2vh;
   flex-direction: column;
+  justify-content: center;
+}
+
+.result-left a {
+  text-decoration: none;
 }
 
 .result-right {
   width: 40%;
   display: flex;
+  margin-inline: 5%;
   justify-content: center;
   align-items: center;
   margin-inline: 5%;
@@ -339,7 +346,7 @@ button {
 
 .result-image {
   width: 100%;
-  max-width: 400px; 
+  max-height: 10px; 
   height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
@@ -355,13 +362,6 @@ button {
 
 .result-filters h4{
   margin-right: 10%;
-}
-
-.result-ingredients {
-  width: 100%;
-  
-  display: flex;
-  flex-direction: row;
 }
 
 /*------------------------*/
