@@ -47,7 +47,7 @@ function Form() {
     const [excludedIngredients, setExcludedIngredients] = useState([]);
 
     
-    // this will force the string into an array to pass into a function
+    // This will force the string into an array to pass into a function
     // Splits the string with commas
     const parseInputToArray = (input) => {
         return input
@@ -203,9 +203,9 @@ function Form() {
                     </select>
                 </div>
                 
-                {/* Calories Input (TODO: MIN MAX) */}
+                {/* Calories Input*/}
                 <div style={{ display: "flex", flexDirection: "row" }}>
-                    <p>Calories</p>
+                    <p>Max Calories</p>
                     <input 
                         type="number" 
                         placeholder="999" 
@@ -213,7 +213,7 @@ function Form() {
                     />
                 </div>
 
-                {/* Time Input (TODO: MIN MAX) */}
+                {/* Time Input
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     <p>Time</p>
                     <input 
@@ -221,7 +221,7 @@ function Form() {
                         placeholder="999"
                         onChange={handleTime} 
                     />
-                </div>
+                </div> */}
             </div>
 
             {/* Main Input */}
