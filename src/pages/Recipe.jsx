@@ -94,7 +94,7 @@ function Recipe() {
               ))}
             </ul>
           </div>
-
+          
           <div className="nutrition-container">
             <h1>Nutritional Facts</h1>
             {nutritionData ? (
@@ -116,52 +116,52 @@ function Recipe() {
             )}
           </div>
 
-
           <div className="health-evaluation-container">
-            <h1 style={{ marginBottom: '9px' }}>Health Evaluation</h1> {/* Reduce gap to text */}
+            <h1 className="health-evaluation-title">Health Evaluation</h1>
             {healthEvaluation ? (
-              <div style={{ fontSize: '1.2rem', lineHeight: '1.8' }}>
-                {healthEvaluation
-                  .split("\n")
-                  .map((line, index) => {
-                    // Bold section titles (Overall Health Rating, Strengths, Weaknesses, Suggestions)
-                    if (/^(Overall Health Rating|Strengths|Weaknesses|Suggestions):/.test(line.trim())) {
-                      return <p key={index}><strong>{line.trim().replace(":", "")}:</strong></p>;
-                    }
+              <div className="health-evaluation-content">
+                {healthEvaluation.split("\n").map((line, index) => {
+                  if (/^\s*(Overall Health Rating):/i.test(line.trim())) {
+                    const parts = line.split(":");
+                    return (
+                      <p key={index}>
+                        <strong>{parts[0]}:</strong>{" "}
+                        <span className="health-rating">{parts[1]}</span>
+                      </p>
+                    );
+                  }
 
-                    // Convert numbered lines into list items
-                    if (/^\d+\./.test(line.trim())) {
-                      return <li key={index}>{line.trim()}</li>;
-                    }
+                  if (/^\s*(Strengths|Weaknesses|Suggestions for Improvement):/i.test(line.trim())) {
+                    return <p key={index} className="health-section-title"><strong>{line.trim().replace(":", "")}:</strong></p>;
+                  }
 
-                    // Render regular text
-                    return <p key={index}>{line}</p>;
-                  })}
+                  if (/^\d+\./.test(line.trim())) {
+                    return <li key={index} className="health-list-item">{line.trim()}</li>;
+                  }
+
+                  return <p key={index} className="health-text">{line}</p>;
+                })}
               </div>
             ) : (
               <p>Loading health evaluation...</p>
             )}
           </div>
 
-
-
           <div className="ingredient-substitutions-container">
             <h1>Ingredient Substitutions</h1>
             {ingredientSubstitutions ? (
               <div>
-                <ul style={{ fontSize: '1.2rem', listStyleType: 'none', padding: 0 }}>
+                <ul className="ingredient-substitutions-list">
                   {ingredientSubstitutions.split("\n").map((line, index) => {
-                    // Check if line starts with a number followed by a period
                     const match = line.match(/^(\d+)\.\s*(.*)$/);
                     if (match) {
-                      // If it starts with a number, bold the number and show the rest as a list item
                       return (
-                        <li key={index} style={{ marginBottom: '10px' }}>
+                        <li key={index} className="ingredient-substitution-item">
                           <strong>{match[1]}.</strong> {match[2]}
                         </li>
                       );
                     }
-                    return <li key={index} style={{ marginBottom: '10px' }}>{line}</li>; // Render any other text normally with space
+                    return <li key={index} className="ingredient-substitution-item">{line}</li>;
                   })}
                 </ul>
               </div>
@@ -169,7 +169,6 @@ function Recipe() {
               <p>Loading ingredient substitutions...</p>
             )}
           </div>
-
 
         </div>
       </div>

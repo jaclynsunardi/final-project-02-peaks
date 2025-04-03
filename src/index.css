@@ -317,13 +317,12 @@ button {
 
 /*------------------------*/
 .recipe-page {
-  width: 100vw; 
+  width: 100vw;
   height: auto;
-
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   background-image: url('./images/halfPattern.png');
   background-size: cover;
   background-position: center;
@@ -331,49 +330,45 @@ button {
 }
 
 .recipe-title {
-  font-size: min(5vw, 60px);  
+  font-size: min(5vw, 60px);
   font-weight: bold;
-  text-align: left;  
+  text-align: left;
   margin-top: 10px;
 }
 
 .recipe-title a {
-  text-decoration: none; 
-  color: #333; /* Darker color */
-  transition: color 0.3s ease-in-out; 
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease-in-out;
 }
 
 .recipe-title a:hover {
-  color: #ff6347; 
+  color: #ff6347;
 }
 
-
 .recipe-container {
-  width: 60%; 
+  width: 60%;
   padding: 5%;
   background-color: #eaecee;
   border-radius: 8px;
   margin-top: 8vh;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-
-  /* Allow the container to grow based on its content */
-  min-height: 90vh; /* Minimum height to ensure it occupies some space */
-  height: auto;     /* Automatically adjust the height depending on content */
+  justify-content: space-between;
+  min-height: 90vh;
+  height: auto;
 }
 
 .recipe-top {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between; /* Ensures content spreads evenly */
+  justify-content: space-between;
   align-items: center;
 }
+
 .recipe-left {
   width: 60%;
-
   display: flex;
   flex-direction: column;
 }
@@ -381,101 +376,118 @@ button {
 .recipe-filters {
   width: 100%;
   margin-top: -8%;
-  
   display: flex;
   flex-direction: row;
 }
 
-.recipe-filters h4{
+.recipe-filters h4 {
   margin-right: 10%;
 }
 
 .ingredients-title {
-  font-size: min(6vw, 40px);  /* Make title bigger */
+  font-size: 2rem; 
   font-weight: bold;
-  margin-bottom: 10px; /* Add space below title */
-  color: #333; /* Dark text */
+  margin-bottom: 10px;
+  color: #333;
+  margin-top: 0;
 }
 
 .ingredients-container {
   padding: 15px;
   border-radius: 8px;
-  width:90%;
-  max-width: 600px; /* Control width */
+  width: 90%;
+  max-width: 600px;
 }
 
 .ingredients-container ul {
-  list-style-type: disc; /* Standard bullet points */
-  padding-left: 20px; /* Proper spacing */
+  list-style-type: disc;
+  padding-left: 20px;
 }
 
 .ingredients-container li {
-  font-size: min(4vw, 25px); /* Slightly smaller than title */
-  line-height: 1.5; /* Better readability */
-  color: #333; /* Slightly softer text */
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #333;
 }
 
 .nutrition-container {
-  margin-top: 100px;
-  flex-grow:1;
+  margin: 20px;
+  flex-grow: 1;
   width: 100%;
   word-wrap: break-word;
 }
 
-.nutrition-container ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.nutrition-container li {
-  margin: 5px 0; /* Optional: Adds some spacing between list items */
-}
-
-/* Increase font size for nutrition container */
 .nutrition-container h1 {
-  font-size: 2rem; /* Adjust as needed */
+  font-size: 2rem;
 }
 
-.nutrition-container ul {
-  font-size: 1.2rem; /* Adjust as needed */
-}
-
-.nutrition-container li {
-  font-size: 1.1rem; /* Adjust as needed */
-}
-
-/* General styling for the nutrition container */
-.nutrition-container {
-  margin: 20px;
-}
-
-/* Grid layout for the nutrition data */
-.nutrition-container .nutrition-data {
+.nutrition-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* Left column for total calories, right for other nutrients */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
-/* Styling for the nutrition section */
-.nutrition-container ul {
+.nutrition-list {
   font-size: 1.2rem;
   list-style-type: none;
   padding: 0;
 }
 
-/* Bold the total calories line */
-.nutrition-container .total-calories {
-  font-weight: bold;
-}
-
-/* General styling for list items */
-.nutrition-container li {
+.nutrition-list li {
+  font-size: 1.1rem;
+  margin: 5px 0;
   font-weight: normal;
 }
 
-/* Bold the lines starting with numbers or containing "total" */
-.nutrition-container li.bold {
+.nutrition-list li.bold,
+.nutrition-list .total-calories {
   font-weight: bold;
+}
+
+.health-evaluation-container {
+  margin: 20px;
+}
+
+.health-evaluation-title {
+  margin-bottom: 9px;
+}
+
+.health-evaluation-content {
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.health-rating {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 50px;
+}
+
+.health-section-title {
+  font-weight: bold;
+}
+
+.health-list-item {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+.health-text {
+  margin-bottom: 10px;
+}
+
+.ingredient-substitutions-container {
+  margin: 20px;
+}
+
+.ingredient-substitutions-list {
+  font-size: 1.2rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+.ingredient-substitution-item {
+  margin-bottom: 10px;
 }
 
 
