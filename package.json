@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -40,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=falase react-scripts build",
+    "build": "set CI=false && react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint .",
