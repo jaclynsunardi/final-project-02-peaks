@@ -14,7 +14,8 @@ export const generateNutrition = async (ingredients = []) => {
             messages: [{
                 role: 'user',
                 content: `Provide a detailed nutritional breakdown for the following ingredients: ${formattedIngredients}. 
-                For each ingredient, include calories, fats, carbohydrates, and proteins. Return the output as a numbered list (1, 2, 3, etc.) for each ingredient. 
+                For each ingredient, include calories, fats, carbohydrates, and proteins per serving size.  
+                Return the output as a numbered list (1, 2, 3, etc.) for each ingredient. 
                 At the end of the list, provide a summary in the following format:
                 Total:
                 - Calories: [total_calories] kcal
@@ -45,13 +46,13 @@ export const generateHealthEvaluation = async (ingredients = []) => {
                 content: `Evaluate the overall healthiness of this combination of ingredients: ${formattedIngredients}.
                 Format the response exactly as follows, ensuring a line break before each bolded section:
 
-                \n**Overall Health Rating:** (Provide a single rating out of 10)
+                \nOverall Health Rating: (Provide a single rating out of 10)
 
-                \n**Strengths:** (List the general strengths of this ingredient combination)
+                \nStrengths: (List the general strengths of this ingredient combination)
 
-                \n**Weaknesses:** (List the general weaknesses of this ingredient combination)
+                \nWeaknesses: (List the general weaknesses of this ingredient combination)
 
-                \n**Suggestions for Improvement:** (Provide suggestions on how to make this dish healthier)
+                \nSuggestions for Improvement: (Provide suggestions on how to make this dish healthier)
 
                 Ensure that the format stays the same every time and avoid evaluating ingredients separately.`
             }],
@@ -65,7 +66,6 @@ export const generateHealthEvaluation = async (ingredients = []) => {
     }
 };
 
-// Feature 3: Ingredient Substitutions & Dietary Adjustments
 export const generateIngredientSubstitutions = async (ingredients = [], dietType = "healthy") => {
     try {
         const formattedIngredients = ingredients.join(", ");
@@ -73,7 +73,13 @@ export const generateIngredientSubstitutions = async (ingredients = [], dietType
             model: 'gpt-3.5-turbo',
             messages: [{
                 role: 'user',
-                content: `For the following ingredients: ${formattedIngredients}, suggest alternatives suitable for a ${dietType} diet.`
+                content: `For the following ingredients: ${formattedIngredients}, suggest alternative substitutions suitable for a ${dietType} diet and explanation. 
+
+                            Please provide the response in the following format:
+                            1. [Original Ingredient]: [Substitution]
+                            2. [Original Ingredient]: [Substitution]
+                            ...
+                            Make sure each substitution is clearly numbered.`
             }],
             max_tokens: 1500,
         });
