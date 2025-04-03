@@ -318,7 +318,7 @@ button {
 /*------------------------*/
 .recipe-page {
   width: 100vw; 
-  height: 110vh;
+  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -351,7 +351,6 @@ button {
 .recipe-container {
   width: 60%; 
   padding: 5%;
-  height: 90vh;
   background-color: #eaecee;
   border-radius: 8px;
   margin-top: 8vh;
@@ -359,6 +358,10 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
+
+  /* Allow the container to grow based on its content */
+  min-height: 90vh; /* Minimum height to ensure it occupies some space */
+  height: auto;     /* Automatically adjust the height depending on content */
 }
 
 .recipe-top {
@@ -418,3 +421,61 @@ button {
   width: 100%;
   word-wrap: break-word;
 }
+
+.nutrition-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nutrition-container li {
+  margin: 5px 0; /* Optional: Adds some spacing between list items */
+}
+
+/* Increase font size for nutrition container */
+.nutrition-container h1 {
+  font-size: 2rem; /* Adjust as needed */
+}
+
+.nutrition-container ul {
+  font-size: 1.2rem; /* Adjust as needed */
+}
+
+.nutrition-container li {
+  font-size: 1.1rem; /* Adjust as needed */
+}
+
+/* General styling for the nutrition container */
+.nutrition-container {
+  margin: 20px;
+}
+
+/* Grid layout for the nutrition data */
+.nutrition-container .nutrition-data {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Left column for total calories, right for other nutrients */
+  gap: 20px;
+}
+
+/* Styling for the nutrition section */
+.nutrition-container ul {
+  font-size: 1.2rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Bold the total calories line */
+.nutrition-container .total-calories {
+  font-weight: bold;
+}
+
+/* General styling for list items */
+.nutrition-container li {
+  font-weight: normal;
+}
+
+/* Bold the lines starting with numbers or containing "total" */
+.nutrition-container li.bold {
+  font-weight: bold;
+}
+
+
