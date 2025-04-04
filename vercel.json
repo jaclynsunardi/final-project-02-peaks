@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "public": true,
   "builds": [
     {
       "src": "package.json",
@@ -11,21 +12,8 @@
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/service-worker.js",
-      "dest": "/service-worker.js"
-    },
-    {
-      "src": "/manifest.json",
-      "dest": "/manifest.json"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/index.html",
-      "status": 200
+      "dest": "/"
     }
   ]
 }

@@ -41,6 +41,8 @@ function Form() {
     //-----------
     
     // State for form input
+    const [formData, setFormData] = useState("");
+
     const [inputValue, setInputValue] = useState("");
     const [excludedValue, setExcludedValue] = useState("")
     
@@ -60,7 +62,7 @@ function Form() {
       // Function for included Ingredients
     const handleInputIngredients = (e) => {
         setInputValue(e.target.value);
-        setInputIngredients(parseInputToArray(e.target.value))  
+        setFormData(parseInputToArray(e.target.value))  
     }
 
     const handleExcludedIngredients = (e) => {
@@ -159,34 +161,89 @@ function Form() {
     return (
         <>
         <div className="form-container">
-            {/* Form Fields */}
-            <div className="filter-bar">
-                {/* Dietary Preference Buttons */}
-                <button 
-                    type="button"
-                    onClick={() => handleDietButtonClick('vegan')} // change to lowercase so the api recognizes the values.
-                    className={tempSelectedDiets.includes('vegan') ? 'selected' : ''} 
-                >
-                    <p style={{ fontFamily:"GroteskReg"}}>Vegan</p>
-                </button>
-                <button 
-                    type="button"
-                    onClick={() => handleDietButtonClick('vegetarian')}
-                    className={tempSelectedDiets.includes('vegetarian') ? 'selected' : ''}
-                >
-                    <p style={{ fontFamily:"GroteskReg"}}>Vegetarian</p>
-                </button>
-                <button 
-                    type="button"
-                    onClick={() => handleDietButtonClick('gluten-free')}
-                    className={tempSelectedDiets.includes('gluten-free') ? 'selected' : ''}
-                >
-                    <p style={{ fontFamily:"GroteskReg"}}>Gluten Free</p>
-                </button>
+            <div className="input-box">
+                <h1>Recipe Search</h1>
+                <div className="input-search">
+                    <button 
+                    className="addButton input-button"
+                    onClick={() => {
+                        const parsed = parseInputToArray(inputValue);
+                        setInputIngredients(prev => [...prev, ...parsed]);
+                        setFormData("");
+                        setInputValue("");
+                    }}
+                    >Add</button>
+                    <input 
+                    className="input-ingredients"
+                    value={inputValue}
+                    onChange={handleInputIngredients}
+                    placeholder="What ingredients do you want in the recipe? e.g. Tomato, Garlic, Cheese"
+                    />
+                    <button 
+                    className="removeButton input-button"
+                    onClick={() => {
+                        const parsed = parseInputToArray(inputValue);
+                        setExcludedIngredients(prev => [...prev, ...parsed]);
+                        setFormData("");
+                        setInputValue("");
+                    }}
+                    >Remove</button>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "10px", justifyContent: "center" }}>
+                  {inputIngredients.map((ingredient, idx) => (
+                    <span
+                      key={`include-${idx}`}
+                      style={{
+                        backgroundColor: "#2ecc71",
+                        color: "white",
+                        borderRadius: "20px",
+                        padding: "5px 10px",
+                        fontFamily: "GroteskReg",
+                        fontSize: "14px"
+                      }}
+                    >
+                      ✅ {ingredient}
+                    </span>
+                  ))}
+                  {excludedIngredients.map((ingredient, idx) => (
+                    <span
+                      key={`exclude-${idx}`}
+                      style={{
+                        backgroundColor: "#FA003F",
+                        color: "white",
+                        borderRadius: "20px",
+                        padding: "5px 10px",
+                        fontFamily: "GroteskReg",
+                        fontSize: "14px"
+                      }}
+                    >
+                      ❌ {ingredient}
+                    </span>
+                  ))}
+                </div>
+                <div className="input-filters filter-bar">
+                    <button 
+                        type="button"
+                        onClick={() => handleDietButtonClick('vegan')}
+                        className={`filter-button diet-filter ${tempSelectedDiets.includes('vegan') ? 'selected' : ''}`}
+                    >
+                        <p style={{ fontFamily: "GroteskReg" }}>Vegan</p>
+                    </button>
+                    <button 
+                        type="button"
+                        onClick={() => handleDietButtonClick('vegetarian')}
+                        className={`filter-button diet-filter ${tempSelectedDiets.includes('vegetarian') ? 'selected' : ''}`}
+                    >
+                        <p style={{ fontFamily: "GroteskReg" }}>Vegetarian</p>
+                    </button>
+                    <button 
+                        type="button"
+                        onClick={() => handleDietButtonClick('gluten-free')}
+                        className={`filter-button diet-filter ${tempSelectedDiets.includes('gluten-free') ? 'selected' : ''}`}
+                    >
+                        <p style={{ fontFamily: "GroteskReg" }}>Gluten Free</p>
+                    </button>
 
-                {/* Nationality Dropdown */}
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    <p>Nationality</p>
                     <select 
                         value={selectedNationality} 
                         onChange={handleNationalityChange} 
@@ -199,31 +256,45 @@ function Form() {
                         <option value="Italian">Italian</option>
                         <option value="Indian">Indian</option>
                     </select>
-                </div>
-                
-                {/* Calories Input*/}
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    <p>Max Calories</p>
+
                     <input 
+                        className="filter-cal"
                         type="number" 
-                        placeholder="999" 
+                        placeholder="Max Calories" 
                         onChange={handleCal}
                     />
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        setInputValue("");
+                        setFormData("");
+                        setInputIngredients([]);
+                        setExcludedIngredients([]);
+                        setTempSelectedDiets([]);
+                        setSelectedNationality("");
+                        setMaxCal(null);
+                      }}
+                      className="filter-button"
+                      style={{
+                        border: "1px solid white",
+                        borderRadius: "8px",
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        color: "white",
+                        fontFamily: "GroteskReg",
+                        padding: "5px 10px",
+                        width: "90px"
+                      }}
+                    >
+                      Reset Filters
+                    </button>
                 </div>
-
-                {/* Time Input
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    <p>Time</p>
-                    <input 
-                        type="number" 
-                        placeholder="999"
-                        onChange={handleTime} 
-                    />
-                </div> */}
+                
             </div>
+            {/* Form Fields */}
+        
 
             {/* Main Input */}
-            <input 
+            {/* <input 
                 type="text" 
                 className="form-input" 
                 value={inputValue} 
@@ -236,7 +307,7 @@ function Form() {
                 value={excludedValue} 
                 onChange={handleExcludedIngredients} 
                 placeholder="What ingredients should be left out? e.g. Potato, Peanut, Pepper"
-            />
+            /> */}
 
             {/* Submit Button */}
             <button 

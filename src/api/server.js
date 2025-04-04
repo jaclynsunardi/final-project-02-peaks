@@ -48,6 +48,7 @@ export const generateHealthEvaluation = async (ingredients = []) => {
 
                 \nOverall Health Rating: (Provide a single rating out of 10)
 
+
                 \nStrengths: (List the general strengths of this ingredient combination)
 
                 \nWeaknesses: (List the general weaknesses of this ingredient combination)
@@ -89,3 +90,4 @@ export const generateIngredientSubstitutions = async (ingredients = [], dietType
         return "Failed to fetch ingredient substitutions.";
     }
 };
+
