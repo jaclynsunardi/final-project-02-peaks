@@ -33,8 +33,9 @@ Everyone nowadays are looking for ways to save money in a world that charges you
 
 ## Step-by-step instructions for the project to be deployed locally  
 
-### **1. **  
-Make sure to have the following API keys:  
+### **1.vMake sure to have the following API keys**  
+ 
+
 - **OpenAI API Key**  
 - **Edamam API Key**  
 
