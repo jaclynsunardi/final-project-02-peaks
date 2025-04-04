@@ -41,6 +41,8 @@ function Form() {
     //-----------
     
     // State for form input
+    const [formData, setFormData] = useState("");
+
     const [inputValue, setInputValue] = useState("");
     const [excludedValue, setExcludedValue] = useState("")
     
@@ -60,7 +62,7 @@ function Form() {
       // Function for included Ingredients
     const handleInputIngredients = (e) => {
         setInputValue(e.target.value);
-        setInputIngredients(parseInputToArray(e.target.value))  
+        setFormData(parseInputToArray(e.target.value))  
     }
 
     const handleExcludedIngredients = (e) => {
@@ -163,13 +165,61 @@ function Form() {
                 <h1>Recipe Search</h1>
                 <div className="input-search">
                     <button 
-                    className="addButton input-button" 
+                    className="addButton input-button"
+                    onClick={() => {
+                        const parsed = parseInputToArray(inputValue);
+                        setInputIngredients(prev => [...prev, ...parsed]);
+                        setFormData("");
+                        setInputValue("");
+                    }}
                     >Add</button>
                     <input 
                     className="input-ingredients"
+                    value={inputValue}
+                    onChange={handleInputIngredients}
                     placeholder="What ingredients do you want in the recipe? e.g. Tomato, Garlic, Cheese"
                     />
-                    <button className="removeButton input-button" >Remove</button>
+                    <button 
+                    className="removeButton input-button"
+                    onClick={() => {
+                        const parsed = parseInputToArray(inputValue);
+                        setExcludedIngredients(prev => [...prev, ...parsed]);
+                        setFormData("");
+                        setInputValue("");
+                    }}
+                    >Remove</button>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "10px", justifyContent: "center" }}>
+                  {inputIngredients.map((ingredient, idx) => (
+                    <span
+                      key={`include-${idx}`}
+                      style={{
+                        backgroundColor: "#2ecc71",
+                        color: "white",
+                        borderRadius: "20px",
+                        padding: "5px 10px",
+                        fontFamily: "GroteskReg",
+                        fontSize: "14px"
+                      }}
+                    >
+                      ✅ {ingredient}
+                    </span>
+                  ))}
+                  {excludedIngredients.map((ingredient, idx) => (
+                    <span
+                      key={`exclude-${idx}`}
+                      style={{
+                        backgroundColor: "#FA003F",
+                        color: "white",
+                        borderRadius: "20px",
+                        padding: "5px 10px",
+                        fontFamily: "GroteskReg",
+                        fontSize: "14px"
+                      }}
+                    >
+                      ❌ {ingredient}
+                    </span>
+                  ))}
                 </div>
                 <div className="input-filters filter-bar">
                     <button 
