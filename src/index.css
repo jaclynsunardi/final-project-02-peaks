@@ -109,6 +109,70 @@ button {
 
 /*------------------------*/
 
+/* Added rule for diet-filter buttons */
+.filter-bar .filter-button.diet-filter {
+  width: 120px;
+  justify-content: center;
+}
+
+.input-box {
+  background-color: rgb(35, 30, 26);
+  height: 40vh;
+  width: 80vw;
+  gap: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.input-box h1 {
+  color: white;
+  font-family: Marimpa;
+}
+
+.input-search {
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  gap: 20px;
+}
+
+.input-ingredients,
+.input-button {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.input-ingredients {
+  width: 50vw;
+  height: 100%;
+  border-radius: 10px;
+  text-align: center;
+  caret-color: transparent;
+}
+
+.input-button {
+  height: 100%; 
+  width: 80px;
+  border-radius: 10px;
+  font-family: Marimpa;
+}
+
+.addButton {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  position: relative;
+}
+
+.removeButton {
+  background-color: #FA003F;
+  border-color: #FA003F;
+  position: relative;
+}
+
 .form-container {
   width: 100vw; 
   height: 100vh;
@@ -137,6 +201,19 @@ button {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center; 
+}
+
+.filter-bar .filter-button {
+  height: 47px;
+  border: 1px solid white;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: GroteskReg;
+  padding: 5px 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
 .filter-bar button {
@@ -169,16 +246,38 @@ button {
 }
 
 .filter-nationality {
-  height: 30px;
+  height: 47px;
   align-self: center;
   margin-left: 3px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-family: GroteskReg;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
-.filter-bar input{
-  width: 50px;
-  height: 25px;
-  align-self: center;
-  margin-left: 3px;
+.filter-cal {
+  height: 47px !important;
+  width: 110px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-family: GroteskReg;
+  font-size: 14px;
+  -moz-appearance: textfield;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.filter-cal::-webkit-outer-spin-button,
+.filter-cal::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .form-input {
@@ -224,7 +323,7 @@ button {
 
 .form-container p {
   color: #e3e9f0;
-  font-family: GroteskReg;
+  font-family: Marimpa;
 }
 
 /*------------------------*/
@@ -539,4 +638,34 @@ button {
   margin-bottom: 10px;
 }
 
+.addButton:hover::after {
+  content: "Include these ingredients in the recipe.";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: GroteskReg;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+}
 
+.removeButton:hover::after {
+  content: "Exclude these ingredients from the recipe.";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: GroteskReg;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+}
