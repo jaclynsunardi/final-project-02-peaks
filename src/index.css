@@ -1,22 +1,22 @@
 /* Free font: https://www.dafont.com/good-brush.font?text=Miso+Hungry*/
 @font-face {
   font-family: Brush;
-  src: url(fonts/brush.ttf)
+  src: url('./fonts/brush.ttf')
 }
 
 @font-face {
   font-family: Marimpa;
-  src: url(fonts/Marimpa.ttf)
+  src: url('./fonts/Marimpa.ttf')
 }
 
 @font-face {
   font-family: GroteskBold;
-  src: url(fonts/Grotesk.ttf)
+  src: url('./fonts/Grotesk.ttf')
 }
 
 @font-face {
   font-family: GroteskReg;
-  src: url(fonts/GroteskReg.ttf)
+  src: url('./fonts/GroteskReg.ttf')
 }
 
 
@@ -109,6 +109,70 @@ button {
 
 /*------------------------*/
 
+/* Added rule for diet-filter buttons */
+.filter-bar .filter-button.diet-filter {
+  width: 120px;
+  justify-content: center;
+}
+
+.input-box {
+  background-color: rgb(35, 30, 26);
+  height: 40vh;
+  width: 80vw;
+  gap: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.input-box h1 {
+  color: white;
+  font-family: Marimpa;
+}
+
+.input-search {
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  gap: 20px;
+}
+
+.input-ingredients,
+.input-button {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.input-ingredients {
+  width: 50vw;
+  height: 100%;
+  border-radius: 10px;
+  text-align: center;
+  caret-color: transparent;
+}
+
+.input-button {
+  height: 100%; 
+  width: 80px;
+  border-radius: 10px;
+  font-family: Marimpa;
+}
+
+.addButton {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  position: relative;
+}
+
+.removeButton {
+  background-color: #FA003F;
+  border-color: #FA003F;
+  position: relative;
+}
+
 .form-container {
   width: 100vw; 
   height: 100vh;
@@ -137,6 +201,19 @@ button {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center; 
+}
+
+.filter-bar .filter-button {
+  height: 47px;
+  border: 1px solid white;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: GroteskReg;
+  padding: 5px 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
 .filter-bar button {
@@ -169,16 +246,38 @@ button {
 }
 
 .filter-nationality {
-  height: 30px;
+  height: 47px;
   align-self: center;
   margin-left: 3px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-family: GroteskReg;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
-.filter-bar input{
-  width: 50px;
-  height: 25px;
-  align-self: center;
-  margin-left: 3px;
+.filter-cal {
+  height: 47px !important;
+  width: 110px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-family: GroteskReg;
+  font-size: 14px;
+  -moz-appearance: textfield;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.filter-cal::-webkit-outer-spin-button,
+.filter-cal::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .form-input {
@@ -224,7 +323,7 @@ button {
 
 .form-container p {
   color: #e3e9f0;
-  font-family: GroteskReg;
+  font-family: Marimpa;
 }
 
 /*------------------------*/
@@ -366,13 +465,12 @@ button {
 
 /*------------------------*/
 .recipe-page {
-  width: 100vw; 
-  height: 110vh;
-
+  width: 100vw;
+  height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   background-image: url('./images/halfPattern.png');
   background-size: cover;
   background-position: center;
@@ -380,46 +478,45 @@ button {
 }
 
 .recipe-title {
-  font-size: min(5vw, 60px);  
+  font-size: min(5vw, 60px);
   font-weight: bold;
-  text-align: left;  
+  text-align: left;
   margin-top: 10px;
 }
 
 .recipe-title a {
-  text-decoration: none; 
-  color: #333; /* Darker color */
-  transition: color 0.3s ease-in-out; 
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease-in-out;
 }
 
 .recipe-title a:hover {
-  color: #ff6347; 
+  color: #ff6347;
 }
 
-
 .recipe-container {
-  width: 60%; 
+  width: 60%;
   padding: 5%;
-  height: 90vh;
   background-color: #eaecee;
   border-radius: 8px;
   margin-top: 8vh;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
+  min-height: 90vh;
+  height: auto;
 }
 
 .recipe-top {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between; /* Ensures content spreads evenly */
+  justify-content: space-between;
   align-items: center;
 }
+
 .recipe-left {
   width: 60%;
-
   display: flex;
   flex-direction: column;
 }
@@ -427,43 +524,148 @@ button {
 .recipe-filters {
   width: 100%;
   margin-top: -8%;
-  
   display: flex;
   flex-direction: row;
 }
 
-.recipe-filters h4{
+.recipe-filters h4 {
   margin-right: 10%;
 }
 
 .ingredients-title {
-  font-size: min(6vw, 40px);  /* Make title bigger */
+  font-size: 2rem; 
   font-weight: bold;
-  margin-bottom: 10px; /* Add space below title */
-  color: #333; /* Dark text */
+  margin-bottom: 10px;
+  color: #333;
+  margin-top: 0;
 }
 
 .ingredients-container {
   padding: 15px;
   border-radius: 8px;
-  width:90%;
-  max-width: 600px; /* Control width */
+  width: 90%;
+  max-width: 600px;
 }
 
 .ingredients-container ul {
-  list-style-type: disc; /* Standard bullet points */
-  padding-left: 20px; /* Proper spacing */
+  list-style-type: disc;
+  padding-left: 20px;
 }
 
 .ingredients-container li {
-  font-size: min(4vw, 25px); /* Slightly smaller than title */
-  line-height: 1.5; /* Better readability */
-  color: #333; /* Slightly softer text */
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #333;
 }
 
 .nutrition-container {
-  margin-top: 100px;
-  flex-grow:1;
+  margin: 20px;
+  flex-grow: 1;
   width: 100%;
   word-wrap: break-word;
+}
+
+.nutrition-container h1 {
+  font-size: 2rem;
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.nutrition-list {
+  font-size: 1.2rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+.nutrition-list li {
+  font-size: 1.1rem;
+  margin: 5px 0;
+  font-weight: normal;
+}
+
+.nutrition-list li.bold,
+.nutrition-list .total-calories {
+  font-weight: bold;
+}
+
+.health-evaluation-container {
+  margin: 20px;
+}
+
+.health-evaluation-title {
+  margin-bottom: 9px;
+}
+
+.health-evaluation-content {
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.health-rating {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 50px;
+}
+
+.health-section-title {
+  font-weight: bold;
+}
+
+.health-list-item {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+.health-text {
+  margin-bottom: 10px;
+}
+
+.ingredient-substitutions-container {
+  margin: 20px;
+}
+
+.ingredient-substitutions-list {
+  font-size: 1.2rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+.ingredient-substitution-item {
+  margin-bottom: 10px;
+}
+
+.addButton:hover::after {
+  content: "Include these ingredients in the recipe.";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: GroteskReg;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.removeButton:hover::after {
+  content: "Exclude these ingredients from the recipe.";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: GroteskReg;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
 }
