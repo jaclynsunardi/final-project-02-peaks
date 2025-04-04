@@ -20,7 +20,7 @@ function Homepage() {
         <button type="button" onClick={scrollToForm}>
           <p><a href="#form">Click to start!</a></p>
         </button>
-        <p>or <Link to="/learn">click here</Link> to learn..</p>
+        <p>or <Link to="/learn">click here</Link> to learn...</p>
         </div>
       <div ref={formRef}> {/* Reference to Form */}
         <Form />
