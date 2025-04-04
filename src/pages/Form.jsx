@@ -159,34 +159,41 @@ function Form() {
     return (
         <>
         <div className="form-container">
-            {/* Form Fields */}
-            <div className="filter-bar">
-                {/* Dietary Preference Buttons */}
-                <button 
-                    type="button"
-                    onClick={() => handleDietButtonClick('vegan')} // change to lowercase so the api recognizes the values.
-                    className={tempSelectedDiets.includes('vegan') ? 'selected' : ''} 
-                >
-                    <p style={{ fontFamily:"GroteskReg"}}>Vegan</p>
-                </button>
-                <button 
-                    type="button"
-                    onClick={() => handleDietButtonClick('vegetarian')}
-                    className={tempSelectedDiets.includes('vegetarian') ? 'selected' : ''}
-                >
-                    <p style={{ fontFamily:"GroteskReg"}}>Vegetarian</p>
-                </button>
-                <button 
-                    type="button"
-                    onClick={() => handleDietButtonClick('gluten-free')}
-                    className={tempSelectedDiets.includes('gluten-free') ? 'selected' : ''}
-                >
-                    <p style={{ fontFamily:"GroteskReg"}}>Gluten Free</p>
-                </button>
+            <div className="input-box">
+                <h1>Recipe Search</h1>
+                <div className="input-search">
+                    <button 
+                    className="addButton input-button" 
+                    >Add</button>
+                    <input 
+                    className="input-ingredients"
+                    placeholder="What ingredients do you want in the recipe? e.g. Tomato, Garlic, Cheese"
+                    />
+                    <button className="removeButton input-button" >Remove</button>
+                </div>
+                <div className="input-filters filter-bar">
+                    <button 
+                        type="button"
+                        onClick={() => handleDietButtonClick('vegan')}
+                        className={`filter-button ${tempSelectedDiets.includes('vegan') ? 'selected' : ''}`}
+                    >
+                        <p style={{ fontFamily: "GroteskReg" }}>Vegan</p>
+                    </button>
+                    <button 
+                        type="button"
+                        onClick={() => handleDietButtonClick('vegetarian')}
+                        className={`filter-button ${tempSelectedDiets.includes('vegetarian') ? 'selected' : ''}`}
+                    >
+                        <p style={{ fontFamily: "GroteskReg" }}>Vegetarian</p>
+                    </button>
+                    <button 
+                        type="button"
+                        onClick={() => handleDietButtonClick('gluten-free')}
+                        className={`filter-button ${tempSelectedDiets.includes('gluten-free') ? 'selected' : ''}`}
+                    >
+                        <p style={{ fontFamily: "GroteskReg" }}>Gluten Free</p>
+                    </button>
 
-                {/* Nationality Dropdown */}
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    <p>Nationality</p>
                     <select 
                         value={selectedNationality} 
                         onChange={handleNationalityChange} 
@@ -199,31 +206,21 @@ function Form() {
                         <option value="Italian">Italian</option>
                         <option value="Indian">Indian</option>
                     </select>
-                </div>
-                
-                {/* Calories Input*/}
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    <p>Max Calories</p>
+
                     <input 
+                        className="filter-cal"
                         type="number" 
-                        placeholder="999" 
+                        placeholder="Max Calories" 
                         onChange={handleCal}
                     />
                 </div>
-
-                {/* Time Input
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    <p>Time</p>
-                    <input 
-                        type="number" 
-                        placeholder="999"
-                        onChange={handleTime} 
-                    />
-                </div> */}
+                
             </div>
+            {/* Form Fields */}
+        
 
             {/* Main Input */}
-            <input 
+            {/* <input 
                 type="text" 
                 className="form-input" 
                 value={inputValue} 
@@ -236,7 +233,7 @@ function Form() {
                 value={excludedValue} 
                 onChange={handleExcludedIngredients} 
                 placeholder="What ingredients should be left out? e.g. Potato, Peanut, Pepper"
-            />
+            /> */}
 
             {/* Submit Button */}
             <button 
