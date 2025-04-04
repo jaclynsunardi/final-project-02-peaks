@@ -9,7 +9,7 @@ function Logo() {
         <h1>
           <Link to="/"
           >
-            Logo
+            <img src={LogoImage} alt="Logo" />
           </Link>
           
         </h1>
