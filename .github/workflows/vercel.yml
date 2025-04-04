@@ -1,14 +1,15 @@
 name: Deploy to Vercel
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 on:
   release:
     types: [published]
   push:
-    # this will deploy data files only when no release is created
     branches:
-      - main
+      - style-2  # ONLY push to this branch will trigger preview deploy
     paths:
       - "data/**"
       - "pages/docs/**"
@@ -19,13 +20,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install Vercel CLI
+
+      - name: Install Vercel CLI
         run: npm install --global vercel@latest
-      - name: pull Vercel environment information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: build project artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: deploy project artifacts to Vercel
+
+      - name: Pull Vercel environment info
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+
+      - name: Build project
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+
+      - name: Deploy to Vercel
         run: |
           OUTPUT=$(du --inodes -d 5 .vercel/output)
           echo "$OUTPUT"
@@ -33,7 +48,12 @@ jobs:
           PERCENTAGE=$(echo "$LAST" | awk 'BEGIN {maxtotal=15000} { printf "%.2f%%", ($1/maxtotal*100) }')
           echo "Vercel file usage percentage" >> $GITHUB_STEP_SUMMARY
           echo "$PERCENTAGE" >> $GITHUB_STEP_SUMMARY
-          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+          fi
 
   load-data:
     runs-on: ubuntu-latest
@@ -46,9 +66,9 @@ jobs:
           filters: |
             data:
               - 'data/**'
-      - name: load json files
+      - name: Load JSON files
         if: steps.changes.outputs.data == 'true'
         run: curl -L -f https://biodrop.io/api/system/reload?secret=${{ secrets.BIODROP_API_SECRET }}
-      - name: load testimonials json files for db managed profiles
+      - name: Load testimonials
         if: steps.changes.outputs.data == 'true'
         run: curl -L -f https://biodrop.io/api/system/testimonials-forms?secret=${{ secrets.BIODROP_API_SECRET }}
