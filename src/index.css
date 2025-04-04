@@ -1,22 +1,22 @@
 /* Free font: https://www.dafont.com/good-brush.font?text=Miso+Hungry*/
 @font-face {
   font-family: Brush;
-  src: url(fonts/brush.ttf)
+  src: url('./fonts/brush.ttf')
 }
 
 @font-face {
   font-family: Marimpa;
-  src: url(fonts/Marimpa.ttf)
+  src: url('./fonts/Marimpa.ttf')
 }
 
 @font-face {
   font-family: GroteskBold;
-  src: url(fonts/Grotesk.ttf)
+  src: url('./fonts/Grotesk.ttf')
 }
 
 @font-face {
   font-family: GroteskReg;
-  src: url(fonts/GroteskReg.ttf)
+  src: url('./fonts/GroteskReg.ttf')
 }
 
 
