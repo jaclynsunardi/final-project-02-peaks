@@ -109,6 +109,12 @@ button {
 
 /*------------------------*/
 
+/* Added rule for diet-filter buttons */
+.filter-bar .filter-button.diet-filter {
+  width: 120px;
+  justify-content: center;
+}
+
 .input-box {
   background-color: rgb(35, 30, 26);
   height: 40vh;
@@ -120,6 +126,7 @@ button {
   align-items: center;
   box-sizing: border-box;
   border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 .input-box h1 {
   color: white;
@@ -196,6 +203,19 @@ button {
   align-items: center; 
 }
 
+.filter-bar .filter-button {
+  height: 47px;
+  border: 1px solid white;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: GroteskReg;
+  padding: 5px 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
 .filter-bar button {
   font-size: min(max(0.5vw, 15px), 25px);
   color: white;
@@ -225,8 +245,6 @@ button {
   color: white;
 }
 
-
-
 .filter-nationality {
   height: 47px;
   align-self: center;
@@ -238,18 +256,12 @@ button {
   padding: 5px 10px;
   font-family: GroteskReg;
   font-size: 14px;
-
+  box-sizing: border-box;
 }
 
 .filter-cal {
-  height: 35px !important;
-}
-
-.filter-bar input {
-  width: 100px;
-
-  align-self: center;
-  margin-left: 3px;
+  height: 47px !important;
+  width: 110px;
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
   border: 1px solid white;
@@ -257,12 +269,13 @@ button {
   padding: 5px 10px;
   font-family: GroteskReg;
   font-size: 14px;
-
-  /* Remove number input spinner/arrows */
   -moz-appearance: textfield;
+  box-sizing: border-box;
+  text-align: center;
 }
-.filter-bar input::-webkit-outer-spin-button,
-.filter-bar input::-webkit-inner-spin-button {
+
+.filter-cal::-webkit-outer-spin-button,
+.filter-cal::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

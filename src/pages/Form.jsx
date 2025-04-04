@@ -225,21 +225,21 @@ function Form() {
                     <button 
                         type="button"
                         onClick={() => handleDietButtonClick('vegan')}
-                        className={`filter-button ${tempSelectedDiets.includes('vegan') ? 'selected' : ''}`}
+                        className={`filter-button diet-filter ${tempSelectedDiets.includes('vegan') ? 'selected' : ''}`}
                     >
                         <p style={{ fontFamily: "GroteskReg" }}>Vegan</p>
                     </button>
                     <button 
                         type="button"
                         onClick={() => handleDietButtonClick('vegetarian')}
-                        className={`filter-button ${tempSelectedDiets.includes('vegetarian') ? 'selected' : ''}`}
+                        className={`filter-button diet-filter ${tempSelectedDiets.includes('vegetarian') ? 'selected' : ''}`}
                     >
                         <p style={{ fontFamily: "GroteskReg" }}>Vegetarian</p>
                     </button>
                     <button 
                         type="button"
                         onClick={() => handleDietButtonClick('gluten-free')}
-                        className={`filter-button ${tempSelectedDiets.includes('gluten-free') ? 'selected' : ''}`}
+                        className={`filter-button diet-filter ${tempSelectedDiets.includes('gluten-free') ? 'selected' : ''}`}
                     >
                         <p style={{ fontFamily: "GroteskReg" }}>Gluten Free</p>
                     </button>
@@ -263,6 +263,30 @@ function Form() {
                         placeholder="Max Calories" 
                         onChange={handleCal}
                     />
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        setInputValue("");
+                        setFormData("");
+                        setInputIngredients([]);
+                        setExcludedIngredients([]);
+                        setTempSelectedDiets([]);
+                        setSelectedNationality("");
+                        setMaxCal(null);
+                      }}
+                      className="filter-button"
+                      style={{
+                        border: "1px solid white",
+                        borderRadius: "8px",
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        color: "white",
+                        fontFamily: "GroteskReg",
+                        padding: "5px 10px",
+                        width: "90px"
+                      }}
+                    >
+                      Reset Filters
+                    </button>
                 </div>
                 
             </div>
