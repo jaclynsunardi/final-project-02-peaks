@@ -54,7 +54,13 @@ Using npm:
 npm install
 ```
 
-### **4. Set Up API Keys**  
+### **4. Switch to Working Branch**
+Switch into the style-2 branch:
+```bash
+git checkout style-2
+```
+
+### **5. Set Up API Keys**  
 Create a `.env.local` file in the root directory and add the API keys in the matching variables:  
 ```env
 REACT_APP_EDAMAM_APP_ID =
@@ -64,7 +70,7 @@ REACT_APP_EDAMAM_API_KEY =
 REACT_APP_OPENAI_API_KEY = 
 ``` 
 
-### **5. Run the Server**  
+### **6. Run the Server**  
 Using npm:  
 ```bash
 npm start
