@@ -29,7 +29,14 @@ function Form() {
     const [maxTime, setMaxTime] = useState(null)
 
     const handleCal = (e) => {
-        setMaxCal(e.target.value)
+        const value = e.target.value;
+        const num = parseInt(value, 10);
+    
+        if (!isNaN(num) && num > 0) {
+            setMaxCal(num);
+        } else {
+            setMaxCal(null);
+        }
     }
 
     //-----------
@@ -279,8 +286,14 @@ function Form() {
                     <input 
                         className="filter-cal"
                         type="number" 
+                        min="0"
                         placeholder="Max Calories" 
                         onChange={handleCal}
+                        onKeyDown={(e) => {
+                            if (["e", "E", "+", "-"].includes(e.key)) {
+                              e.preventDefault();
+                            }
+                          }}
                     />
 
                     {/* reset filters -> REMOVES ALL FILTERS AND INGREDIENTS*/}
