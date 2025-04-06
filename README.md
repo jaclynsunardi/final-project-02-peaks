@@ -77,7 +77,10 @@ It should open a browser, if not, open a browser and go to this link:
 ## Project Sources  
 - **Live Website**: final-project-02-peaks.vercel.app
 - **GitHub Repository**: [GitHub Repository](https://github.com/CMPT-276-SPRING-2025/final-project-02-peaks)
+- **Video Demo**:
+- **Milestone 2 Final Report**: 
 
 
 
 ## License 
+This project is licensed under the MIT license and is meant for educational purposes. 
