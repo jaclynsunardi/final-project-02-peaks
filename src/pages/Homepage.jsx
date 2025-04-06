@@ -2,15 +2,16 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 import Form from './Form';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 
 function Homepage() {
   const formRef = useRef(null);
 
+  // function to scroll to form -> (click to start!)
   const scrollToForm = () => {
     if (formRef.current) {
-      const yOffset = -100;
+      const yOffset = -40;
       const y = formRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
   
       window.scrollTo({ top: y, behavior: 'smooth' });
@@ -30,7 +31,7 @@ function Homepage() {
         </button>
         <p className = "to-learn">or <Link to="/learn">click here</Link> to learn...</p>
         </div>
-      <div ref={formRef}> {/* Reference to Form */}
+      <div ref={formRef}> {/* goes to form*/}
         <Form/>
         <Footer/>
       </div>

@@ -25,18 +25,12 @@ function Form() {
     //-----------
 
     // State for calories
-    // Might have to get rid of time
     const [maxCal, setMaxCal] = useState(null)
     const [maxTime, setMaxTime] = useState(null)
 
     const handleCal = (e) => {
         setMaxCal(e.target.value)
     }
-
-    // Commented this because the time thing on the api is wack
-    // const handleTime = (e) => {
-    //     setMaxTime(e.target.value)
-    // }
 
     //-----------
     
@@ -95,42 +89,48 @@ function Form() {
         ); 
     };
 
-    //-------- INFO NEEDED TODO (PLACEHOLDERS -> USE API TO GET THESE VALUES)
+    //--------
 
-    const recipeName = "Recipe Name";
-    const recipeLink = "https://en.wikipedia.org/wiki/Placeholder";
+    // Takes filters -> Used in recipe page
     const [filter1, filter2, filter3] = selectedDiets.concat(["", "", ""]).slice(0, 3);
-    const description = "Description if we can do it?";
-    const imageUrl = ""; 
-    const recipeIngredients = ""; // LIKE AN ARRAY (or smth.. pass these values to recipe page)
     
     //-------------
     
     // This function will generate a list of the recipes given the parsed data, and throw it to react to render.
     const [recipeList, setRecipeList] = useState([]);
 
+    // Itll also check if there are no results
+    const [noResults, setNoResults] = useState(false); 
+    
     useEffect(() => {
-        if (recipeData.length > 0) {
-          let recipeListtmp = [];
-          for (let i = 0; i < recipeData.length; i++) {
-            let item = recipeData[i];
-            recipeListtmp.push(
-              <Result 
-                key={i}
-                recipeName={item.recipeName}
-                recipeLink={item.recipeURL}
-                filter1={filter1}
-                filter2={filter2}
-                filter3={filter3}
-                description={"Test Description"}
-                imageUrl={item.imageURL}
-                recipeIngredients={item.ingredients.map(ingr => ingr.food)}
-              />
-            );
-          }
-          setRecipeList(recipeListtmp);
+      const timer = setTimeout(() => {
+        if (recipeData.length === 0) {
+            setNoResults(true);
+        } else {
+            let recipeListtmp = [];
+            for (let i = 0; i < recipeData.length; i++) {
+                let item = recipeData[i];
+                recipeListtmp.push(
+                    <Result 
+                        key={i}
+                        recipeName={item.recipeName}
+                        recipeLink={item.recipeURL}
+                        filter1={filter1}
+                        filter2={filter2}
+                        filter3={filter3}
+                        description={"Test Description"}
+                        imageUrl={item.imageURL}
+                        recipeIngredients={item.ingredients.map(ingr => ingr.food)}
+                    />
+                );
+            }
+            setRecipeList(recipeListtmp);
+            setNoResults(false);
         }
-      }, [recipeData, filter1, filter2, filter3]);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+    }, [recipeData, filter1, filter2, filter3]);
 
     //-------------
 
@@ -162,8 +162,11 @@ function Form() {
         <>
         <div className="form-container">
             <div className="input-box">
+              {/* Recipe Search Title */}
               <h1 className = "form-header">Recipe Search</h1>
                 <div className="input-search">
+
+                    {/* Add ingredient button */}
                     <button 
                     className="addButton input-button"
                     onClick={() => {
@@ -173,12 +176,16 @@ function Form() {
                         setInputValue("");
                     }}
                     >Add</button>
+
+                    {/* Text box for user input */}
                     <input 
                     className="input-ingredients"
                     value={inputValue}
                     onChange={handleInputIngredients}
                     placeholder="What ingredients do you want in the recipe? e.g. Apple, Kimchi, Cheese"
                     />
+
+                    {/* Remove ingredient button */}
                     <button 
                     className="removeButton input-button"
                     onClick={() => {
@@ -189,6 +196,8 @@ function Form() {
                     }}
                     >Remove</button>
                 </div>
+
+                {/* Submission -> Show added / remove ingredient */}
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "40px", marginBottom: "-20px", justifyContent: "center" }}>
                   {inputIngredients.map((ingredient, idx) => (
                     <span
@@ -220,8 +229,12 @@ function Form() {
                       ❌ {ingredient}
                     </span>
                   ))}
+
+                {/* vv---------FILTERS---------vv */}
+
                 </div>
                 <div className="input-filters filter-bar">
+                    {/* vegan filter */}
                     <button 
                         type="button"
                         onClick={() => handleDietButtonClick('vegan')}
@@ -229,6 +242,8 @@ function Form() {
                     >
                         <p style={{ fontFamily: "GroteskReg", color: "black"}}>Vegan</p>
                     </button>
+
+                    {/* vegetarian button */}
                     <button 
                         type="button"
                         onClick={() => handleDietButtonClick('vegetarian')}
@@ -236,6 +251,8 @@ function Form() {
                     >
                         <p style={{ fontFamily: "GroteskReg", color: "black" }}>Vegetarian</p>
                     </button>
+
+                    {/* gluten free button */}
                     <button 
                         type="button"
                         onClick={() => handleDietButtonClick('gluten-free')}
@@ -244,12 +261,12 @@ function Form() {
                         <p style={{ fontFamily: "GroteskReg", color: "black" }}>Gluten Free</p>
                     </button>
 
+                    {/* cuisine dropdown */}
                     <select 
                         value={selectedNationality} 
                         onChange={handleNationalityChange} 
                         className="filter-nationality"
                     >
-                        {/* RENAMED TO CUISINE */}
                         <option value="">Select Cuisine</option>
                         <option value="American">American</option>
                         <option value="Asian">Asian</option>
@@ -257,13 +274,16 @@ function Form() {
                         <option value="Italian">Italian</option>
                         <option value="Indian">Indian</option>
                     </select>
-
+                    
+                    {/* max calories */}
                     <input 
                         className="filter-cal"
                         type="number" 
                         placeholder="Max Calories" 
                         onChange={handleCal}
                     />
+
+                    {/* reset filters -> REMOVES ALL FILTERS AND INGREDIENTS*/}
                     <button 
                       type="button"
                       onClick={() => {
@@ -292,26 +312,8 @@ function Form() {
                 </div>
                 
             </div>
-            {/* Form Fields */}
-        
 
-            {/* Main Input */}
-            {/* <input 
-                type="text" 
-                className="form-input" 
-                value={inputValue} 
-                onChange={handleInputIngredients} 
-                placeholder="What ingredients do you want in the recipe? e.g. Tomato, Garlic, Cheese"
-            />
-            <input 
-                type="text" 
-                className="form-input" 
-                value={excludedValue} 
-                onChange={handleExcludedIngredients} 
-                placeholder="What ingredients should be left out? e.g. Potato, Peanut, Pepper"
-            /> */}
-
-            {/* Submit Button */}
+            {/* submission button */}
             <button 
                 type="button"
                 onClick={handleSubmit} 
@@ -320,28 +322,19 @@ function Form() {
                 Submit
             </button>
 
-            {/* Error for empty input */}
+            {/* Shows error for empty input */}
             {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
 
         {/* Results section */}
         {showSubmitPage && (
-            <div className="form-submit">
-                {/* <Result 
-                    recipeName={recipeName}
-                    recipeLink={recipeLink}
-                    filter1={filter1}
-                    filter2={filter2}
-                    filter3={filter3}
-                    description={description}
-                    imageUrl={imageUrl}
-                    recipeIngredients = {recipeIngredients}
-                /> */}
-                {recipeList}
-
-                {/* Make like maybe 2 more results after we figure this out */}
-
-            </div>
+          <div className="form-submit">
+              {noResults ? (
+                  <p className="error-message">No results found</p>
+              ) : (
+                  recipeList
+              )}
+          </div>
         )}
         </>
     );
