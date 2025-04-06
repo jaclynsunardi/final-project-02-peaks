@@ -1,4 +1,4 @@
-// THIS IS A MODIFIED VERSION SO THAT IT WORKS IN THE FRONTEND!!!!
+
 
 // getRecipe: This function queries the API with the specified parameters and returns a list of recipes.
 //
