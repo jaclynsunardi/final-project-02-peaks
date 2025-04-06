@@ -8,6 +8,7 @@ import Recipe from './pages/Recipe.jsx';
 
 function App() {
   return (
+    // init routes used in web app
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/learn" element={<Learn />} />

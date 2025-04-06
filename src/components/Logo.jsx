@@ -6,6 +6,7 @@ import LogoImage2 from '../images/logoImage-2.png';
 function Logo() {
   return (
     <>
+      {/* top left logo */}
       <div className="logo-container">
         <h1>
           <Link to="/"

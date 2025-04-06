@@ -8,6 +8,7 @@ import Form from './pages/Form.jsx';
 import Learn from './pages/Learn.jsx';
 import Recipe from './pages/Recipe.jsx';
 
+// Routes website links together
 const router = createBrowserRouter([
   {
     path: '/',
