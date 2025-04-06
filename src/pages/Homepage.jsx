@@ -10,9 +10,13 @@ function Homepage() {
 
   const scrollToForm = () => {
     if (formRef.current) {
-      formRef.current.scrollIntoView({ behavior: 'smooth' });
+      const yOffset = -100;
+      const y = formRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
+  
 
   return (
     <>

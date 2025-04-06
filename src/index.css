@@ -729,6 +729,15 @@ button {
   color: #eaecee;
 }
 
+.divider {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  border: 1px solid black;
+  top: 100px; /* adjust based on where you want it */
+  z-index: 10; /* in case it's hidden behind something */
+}
+
 .nutrition-title {
   margin-top: 8%;
   font-size: 2.5rem;
@@ -743,24 +752,26 @@ button {
   margin-top: -1%;
 }
 
-.nutrition-grid {
+/* .nutrition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-}
+} */
 
 .nutrition-ingredient-wrapper {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: space-between;
   align-content: center;
   justify-content: center;
   gap: 5vw;
+  margin-top: -5%;
 }
 
 .nutrition-ingredients {
-  width: 25%;
-  margin-top: -5%;
+  width: 22%;
+  margin-left: 5%;
 }
 
 .nutrition-list {
