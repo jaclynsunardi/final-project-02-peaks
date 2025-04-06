@@ -11,13 +11,13 @@ import Recipe from './pages/Recipe.jsx';
 // Routes website links together
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '*',
     element: <App />,
     children: [
-      { path: '/', element: <Homepage /> },
-      { path: '/form', element: <Form /> },
-      { path: '/learn', element: <Learn /> },
-      { path: '/recipe', element: <Recipe /> },
+      { path: '', element: <Homepage /> },
+      { path: 'form', element: <Form /> },
+      { path: 'learn', element: <Learn /> },
+      { path: 'recipe', element: <Recipe /> },
     ],
   },
 ], {

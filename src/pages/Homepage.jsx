@@ -27,7 +27,7 @@ function Homepage() {
         <h1>Miso Hungry</h1>
         <h4>The simple recipe generator catered to your ingredients</h4>
         <button type="button" onClick={scrollToForm}>
-          <p><a href="#form">Click to start!</a></p>
+          <p><a>Click to start!</a></p>
         </button>
         <p className = "to-learn">or <Link to="/learn">click here</Link> to learn...</p>
         </div>
