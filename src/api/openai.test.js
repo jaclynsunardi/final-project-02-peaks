@@ -2,7 +2,7 @@ import {
     generateNutrition, 
     generateHealthEvaluation, 
     generateIngredientSubstitutions 
-  } from './server';
+  } from './openaiapi';
   
   // Mock the OpenAI module properly
   jest.mock('openai', () => {
