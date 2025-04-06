@@ -126,7 +126,7 @@ const healthGroups = healthEvaluation ? groupHealthData(healthEvaluation) : [];
             </div>
           </div>
           </div>
-          
+
           <h1 className="nutrition-title">Nutritional Facts</h1>
           <div className="nutrition-container">
             {nutritionData ? (
@@ -162,6 +162,7 @@ const healthGroups = healthEvaluation ? groupHealthData(healthEvaluation) : [];
                       </p>
                     );
                   }
+                  return null;
                 })}
 
                 {/* group sections strength / weaknesses / suggestions into own divs */}
