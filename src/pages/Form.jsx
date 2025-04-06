@@ -162,7 +162,7 @@ function Form() {
         <>
         <div className="form-container">
             <div className="input-box">
-                <h1>Recipe Search</h1>
+              <h1 className = "form-header">Recipe Search</h1>
                 <div className="input-search">
                     <button 
                     className="addButton input-button"
@@ -177,7 +177,7 @@ function Form() {
                     className="input-ingredients"
                     value={inputValue}
                     onChange={handleInputIngredients}
-                    placeholder="What ingredients do you want in the recipe? e.g. Tomato, Garlic, Cheese"
+                    placeholder="What ingredients do you want in the recipe? e.g. Apple, Kimchi, Cheese"
                     />
                     <button 
                     className="removeButton input-button"
@@ -189,7 +189,7 @@ function Form() {
                     }}
                     >Remove</button>
                 </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "10px", justifyContent: "center" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "40px", marginBottom: "-20px", justifyContent: "center" }}>
                   {inputIngredients.map((ingredient, idx) => (
                     <span
                       key={`include-${idx}`}
@@ -227,21 +227,21 @@ function Form() {
                         onClick={() => handleDietButtonClick('vegan')}
                         className={`filter-button diet-filter ${tempSelectedDiets.includes('vegan') ? 'selected' : ''}`}
                     >
-                        <p style={{ fontFamily: "GroteskReg" }}>Vegan</p>
+                        <p style={{ fontFamily: "GroteskReg", color: "black"}}>Vegan</p>
                     </button>
                     <button 
                         type="button"
                         onClick={() => handleDietButtonClick('vegetarian')}
                         className={`filter-button diet-filter ${tempSelectedDiets.includes('vegetarian') ? 'selected' : ''}`}
                     >
-                        <p style={{ fontFamily: "GroteskReg" }}>Vegetarian</p>
+                        <p style={{ fontFamily: "GroteskReg", color: "black" }}>Vegetarian</p>
                     </button>
                     <button 
                         type="button"
                         onClick={() => handleDietButtonClick('gluten-free')}
                         className={`filter-button diet-filter ${tempSelectedDiets.includes('gluten-free') ? 'selected' : ''}`}
                     >
-                        <p style={{ fontFamily: "GroteskReg" }}>Gluten Free</p>
+                        <p style={{ fontFamily: "GroteskReg", color: "black" }}>Gluten Free</p>
                     </button>
 
                     <select 
@@ -249,7 +249,8 @@ function Form() {
                         onChange={handleNationalityChange} 
                         className="filter-nationality"
                     >
-                        <option value="">Select Nationality</option>
+                        {/* RENAMED TO CUISINE */}
+                        <option value="">Select Cuisine</option>
                         <option value="American">American</option>
                         <option value="Asian">Asian</option>
                         <option value="Central Europe">European</option>
@@ -276,13 +277,14 @@ function Form() {
                       }}
                       className="filter-button"
                       style={{
-                        border: "1px solid white",
+                        border: "1.5px solid grey",
                         borderRadius: "8px",
                         backgroundColor: "rgba(255, 255, 255, 0.1)",
-                        color: "white",
+                        color: "rgb(34, 33, 33)",
                         fontFamily: "GroteskReg",
                         padding: "5px 10px",
-                        width: "90px"
+                        width: "90px",
+                        fontSize: "1rem"
                       }}
                     >
                       Reset Filters
