@@ -134,7 +134,7 @@ function Form() {
             setRecipeList(recipeListtmp);
             setNoResults(false);
         }
-    }, 1000);
+    }, 0);
 
     return () => clearTimeout(timer);
     }, [recipeData, filter1, filter2, filter3]);
