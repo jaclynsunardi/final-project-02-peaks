@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom'; 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
 import App from './App.jsx';
 import './index.css';
 import Homepage from './pages/Homepage.jsx';
@@ -20,14 +20,10 @@ const router = createBrowserRouter([
       { path: 'recipe', element: <Recipe /> },
     ],
   },
-],
-);
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-    <App />
-  </BrowserRouter>
-  <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
