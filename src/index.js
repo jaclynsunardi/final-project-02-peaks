@@ -20,9 +20,8 @@ const router = createBrowserRouter([
       { path: 'recipe', element: <Recipe /> },
     ],
   },
-], {
-  basename: '/final-project-02-peaks',
-});
+],
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
